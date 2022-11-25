@@ -1,4 +1,4 @@
-import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj} from "@ijstech/eth-contract";
+import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj, TransactionOptions} from "@ijstech/eth-contract";
 import Bin from "./OSWAP_PausablePair.json";
 
 export class OSWAP_PausablePair extends Contract{
@@ -6,36 +6,36 @@ export class OSWAP_PausablePair extends Contract{
         super(wallet, address, Bin.abi, Bin.bytecode);
         this.assign()
     }
-    deploy(): Promise<string>{
-        return this.__deploy();
+    deploy(options?: TransactionOptions): Promise<string>{
+        return this.__deploy([], options);
     }
     factory: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     isLive: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     }
     setLive: {
-        (isLive:boolean): Promise<TransactionReceipt>;
-        call: (isLive:boolean) => Promise<void>;
+        (isLive:boolean, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (isLive:boolean, options?: TransactionOptions) => Promise<void>;
     }
     private assign(){
-        let factory_call = async (): Promise<string> => {
-            let result = await this.call('factory');
+        let factory_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('factory',[],options);
             return result;
         }
         this.factory = factory_call
-        let isLive_call = async (): Promise<boolean> => {
-            let result = await this.call('isLive');
+        let isLive_call = async (options?: TransactionOptions): Promise<boolean> => {
+            let result = await this.call('isLive',[],options);
             return result;
         }
         this.isLive = isLive_call
-        let setLive_send = async (isLive:boolean): Promise<TransactionReceipt> => {
-            let result = await this.send('setLive',[isLive]);
+        let setLive_send = async (isLive:boolean, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('setLive',[isLive],options);
             return result;
         }
-        let setLive_call = async (isLive:boolean): Promise<void> => {
-            let result = await this.call('setLive',[isLive]);
+        let setLive_call = async (isLive:boolean, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('setLive',[isLive],options);
             return;
         }
         this.setLive = Object.assign(setLive_send, {

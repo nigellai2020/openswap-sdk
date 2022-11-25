@@ -20,12 +20,12 @@ import {
     OSWAP_RangeFactory,
     OSWAP_VotingExecutor3,
     OSWAP_RestrictedPairCreator,
-    OSWAP_RestrictedLiquidityProvider1,
     OSWAP_RestrictedFactory,
     OSWAP_VotingExecutor4,
     OSWAP_ConfigStore,
-    OSWAP_RestrictedPairOracle
-} from './contracts';
+    OSWAP_RestrictedPairOracle,
+    OSWAP_RestrictedLiquidityProvider1
+} from './contracts/index';
 import {OpenSwap} from './OpenSwap';
 export interface ICoreContractsDeploymentResult {
     administrator?: string;

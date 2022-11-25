@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber, Event } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, Event, TransactionOptions } from "@ijstech/eth-contract";
 export interface IExecutePairRestartParams {
     factory: string;
     pair: string;
@@ -49,7 +49,7 @@ export interface IVetoVotingVoteParams {
 }
 export declare class OAXDEX_Administrator extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(governance: string): Promise<string>;
+    deploy(governance: string, options?: TransactionOptions): Promise<string>;
     parseAddAdminEvent(receipt: TransactionReceipt): OAXDEX_Administrator.AddAdminEvent[];
     decodeAddAdminEvent(event: Event): OAXDEX_Administrator.AddAdminEvent;
     parseRemoveAdminEvent(receipt: TransactionReceipt): OAXDEX_Administrator.RemoveAdminEvent[];
@@ -67,101 +67,101 @@ export declare class OAXDEX_Administrator extends Contract {
     parseVotedVetoEvent(receipt: TransactionReceipt): OAXDEX_Administrator.VotedVetoEvent[];
     decodeVotedVetoEvent(event: Event): OAXDEX_Administrator.VotedVetoEvent;
     addAdmin: {
-        (admin: string): Promise<TransactionReceipt>;
-        call: (admin: string) => Promise<void>;
+        (admin: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (admin: string, options?: TransactionOptions) => Promise<void>;
     };
     admins: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     adminsIdx: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     allAdmins: {
-        (): Promise<string[]>;
+        (options?: TransactionOptions): Promise<string[]>;
     };
     executeFactoryRestart: {
-        (factory: string): Promise<TransactionReceipt>;
-        call: (factory: string) => Promise<void>;
+        (factory: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (factory: string, options?: TransactionOptions) => Promise<void>;
     };
     executeFactoryShutdown: {
-        (factory: string): Promise<TransactionReceipt>;
-        call: (factory: string) => Promise<void>;
+        (factory: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (factory: string, options?: TransactionOptions) => Promise<void>;
     };
     executePairRestart: {
-        (params: IExecutePairRestartParams): Promise<TransactionReceipt>;
-        call: (params: IExecutePairRestartParams) => Promise<void>;
+        (params: IExecutePairRestartParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IExecutePairRestartParams, options?: TransactionOptions) => Promise<void>;
     };
     executePairShutdown: {
-        (params: IExecutePairShutdownParams): Promise<TransactionReceipt>;
-        call: (params: IExecutePairShutdownParams) => Promise<void>;
+        (params: IExecutePairShutdownParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IExecutePairShutdownParams, options?: TransactionOptions) => Promise<void>;
     };
     executeVetoVoting: {
-        (votingContract: string): Promise<TransactionReceipt>;
-        call: (votingContract: string) => Promise<void>;
+        (votingContract: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (votingContract: string, options?: TransactionOptions) => Promise<void>;
     };
     factoryRestart: {
-        (params: IFactoryRestartParams): Promise<TransactionReceipt>;
-        call: (params: IFactoryRestartParams) => Promise<void>;
+        (params: IFactoryRestartParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IFactoryRestartParams, options?: TransactionOptions) => Promise<void>;
     };
     factoryRestartVote: {
-        (params: IFactoryRestartVoteParams): Promise<boolean>;
+        (params: IFactoryRestartVoteParams, options?: TransactionOptions): Promise<boolean>;
     };
     factoryShutdown: {
-        (params: IFactoryShutdownParams): Promise<TransactionReceipt>;
-        call: (params: IFactoryShutdownParams) => Promise<void>;
+        (params: IFactoryShutdownParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IFactoryShutdownParams, options?: TransactionOptions) => Promise<void>;
     };
     factoryShutdownVote: {
-        (params: IFactoryShutdownVoteParams): Promise<boolean>;
+        (params: IFactoryShutdownVoteParams, options?: TransactionOptions): Promise<boolean>;
     };
     getFactoryRestartVote: {
-        (factory: string): Promise<boolean[]>;
+        (factory: string, options?: TransactionOptions): Promise<boolean[]>;
     };
     getFactoryShutdownVote: {
-        (factory: string): Promise<boolean[]>;
+        (factory: string, options?: TransactionOptions): Promise<boolean[]>;
     };
     getPairRestartVote: {
-        (pair: string): Promise<boolean[]>;
+        (pair: string, options?: TransactionOptions): Promise<boolean[]>;
     };
     getPairShutdownVote: {
-        (pair: string): Promise<boolean[]>;
+        (pair: string, options?: TransactionOptions): Promise<boolean[]>;
     };
     getVetoVotingVote: {
-        (votingContract: string): Promise<boolean[]>;
+        (votingContract: string, options?: TransactionOptions): Promise<boolean[]>;
     };
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     maxAdmin: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     pairRestart: {
-        (params: IPairRestartParams): Promise<TransactionReceipt>;
-        call: (params: IPairRestartParams) => Promise<void>;
+        (params: IPairRestartParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IPairRestartParams, options?: TransactionOptions) => Promise<void>;
     };
     pairRestartVote: {
-        (params: IPairRestartVoteParams): Promise<boolean>;
+        (params: IPairRestartVoteParams, options?: TransactionOptions): Promise<boolean>;
     };
     pairShutdown: {
-        (params: IPairShutdownParams): Promise<TransactionReceipt>;
-        call: (params: IPairShutdownParams) => Promise<void>;
+        (params: IPairShutdownParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IPairShutdownParams, options?: TransactionOptions) => Promise<void>;
     };
     pairShutdownVote: {
-        (params: IPairShutdownVoteParams): Promise<boolean>;
+        (params: IPairShutdownVoteParams, options?: TransactionOptions): Promise<boolean>;
     };
     removeAdmin: {
-        (admin: string): Promise<TransactionReceipt>;
-        call: (admin: string) => Promise<void>;
+        (admin: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (admin: string, options?: TransactionOptions) => Promise<void>;
     };
     setMaxAdmin: {
-        (maxAdmin: number | BigNumber): Promise<TransactionReceipt>;
-        call: (maxAdmin: number | BigNumber) => Promise<void>;
+        (maxAdmin: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (maxAdmin: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     vetoVoting: {
-        (params: IVetoVotingParams): Promise<TransactionReceipt>;
-        call: (params: IVetoVotingParams) => Promise<void>;
+        (params: IVetoVotingParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IVetoVotingParams, options?: TransactionOptions) => Promise<void>;
     };
     vetoVotingVote: {
-        (params: IVetoVotingVoteParams): Promise<boolean>;
+        (params: IVetoVotingVoteParams, options?: TransactionOptions): Promise<boolean>;
     };
     private assign;
 }

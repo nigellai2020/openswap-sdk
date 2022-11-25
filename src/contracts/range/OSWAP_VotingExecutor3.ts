@@ -1,4 +1,4 @@
-import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj} from "@ijstech/eth-contract";
+import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj, TransactionOptions} from "@ijstech/eth-contract";
 import Bin from "./OSWAP_VotingExecutor3.json";
 
 export interface IDeployParams {governance:string;factory:string;hybridRegistry:string}
@@ -7,44 +7,44 @@ export class OSWAP_VotingExecutor3 extends Contract{
         super(wallet, address, Bin.abi, Bin.bytecode);
         this.assign()
     }
-    deploy(params: IDeployParams): Promise<string>{
-        return this.__deploy([params.governance,params.factory,params.hybridRegistry]);
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>{
+        return this.__deploy([params.governance,params.factory,params.hybridRegistry], options);
     }
     execute: {
-        (params:string[]): Promise<TransactionReceipt>;
-        call: (params:string[]) => Promise<void>;
+        (params:string[], options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params:string[], options?: TransactionOptions) => Promise<void>;
     }
     factory: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     hybridRegistry: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     private assign(){
-        let factory_call = async (): Promise<string> => {
-            let result = await this.call('factory');
+        let factory_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('factory',[],options);
             return result;
         }
         this.factory = factory_call
-        let governance_call = async (): Promise<string> => {
-            let result = await this.call('governance');
+        let governance_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('governance',[],options);
             return result;
         }
         this.governance = governance_call
-        let hybridRegistry_call = async (): Promise<string> => {
-            let result = await this.call('hybridRegistry');
+        let hybridRegistry_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('hybridRegistry',[],options);
             return result;
         }
         this.hybridRegistry = hybridRegistry_call
-        let execute_send = async (params:string[]): Promise<TransactionReceipt> => {
-            let result = await this.send('execute',[this.wallet.utils.stringToBytes32(params)]);
+        let execute_send = async (params:string[], options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('execute',[this.wallet.utils.stringToBytes32(params)],options);
             return result;
         }
-        let execute_call = async (params:string[]): Promise<void> => {
-            let result = await this.call('execute',[this.wallet.utils.stringToBytes32(params)]);
+        let execute_call = async (params:string[], options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('execute',[this.wallet.utils.stringToBytes32(params)],options);
             return;
         }
         this.execute = Object.assign(execute_send, {

@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber, Event } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, Event, TransactionOptions } from "@ijstech/eth-contract";
 export interface IDeployParams {
     governance: string;
     pairCreator: string;
@@ -17,7 +17,7 @@ export interface ISetLiveForPairParams {
 }
 export declare class OSWAP_FactoryBase extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(params: IDeployParams): Promise<string>;
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>;
     parsePairCreatedEvent(receipt: TransactionReceipt): OSWAP_FactoryBase.PairCreatedEvent[];
     decodePairCreatedEvent(event: Event): OSWAP_FactoryBase.PairCreatedEvent;
     parsePairRestartedEvent(receipt: TransactionReceipt): OSWAP_FactoryBase.PairRestartedEvent[];
@@ -29,34 +29,34 @@ export declare class OSWAP_FactoryBase extends Contract {
     parseShutdownedEvent(receipt: TransactionReceipt): OSWAP_FactoryBase.ShutdownedEvent[];
     decodeShutdownedEvent(event: Event): OSWAP_FactoryBase.ShutdownedEvent;
     allPairs: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     allPairsLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     createPair: {
-        (params: ICreatePairParams): Promise<TransactionReceipt>;
-        call: (params: ICreatePairParams) => Promise<string>;
+        (params: ICreatePairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ICreatePairParams, options?: TransactionOptions) => Promise<string>;
     };
     getPair: {
-        (params: IGetPairParams): Promise<string>;
+        (params: IGetPairParams, options?: TransactionOptions): Promise<string>;
     };
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     isLive: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     };
     pairCreator: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     setLive: {
-        (isLive: boolean): Promise<TransactionReceipt>;
-        call: (isLive: boolean) => Promise<void>;
+        (isLive: boolean, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (isLive: boolean, options?: TransactionOptions) => Promise<void>;
     };
     setLiveForPair: {
-        (params: ISetLiveForPairParams): Promise<TransactionReceipt>;
-        call: (params: ISetLiveForPairParams) => Promise<void>;
+        (params: ISetLiveForPairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetLiveForPairParams, options?: TransactionOptions) => Promise<void>;
     };
     private assign;
 }

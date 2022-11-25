@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, TransactionOptions } from "@ijstech/eth-contract";
 export interface INewVoteParams {
     executor: string;
     name: string;
@@ -11,13 +11,13 @@ export interface INewVoteParams {
 }
 export declare class OAXDEX_VotingRegistry extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(governance: string): Promise<string>;
+    deploy(governance: string, options?: TransactionOptions): Promise<string>;
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     newVote: {
-        (params: INewVoteParams): Promise<TransactionReceipt>;
-        call: (params: INewVoteParams) => Promise<void>;
+        (params: INewVoteParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: INewVoteParams, options?: TransactionOptions) => Promise<void>;
     };
     private assign;
 }

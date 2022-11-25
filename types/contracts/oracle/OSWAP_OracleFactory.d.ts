@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber, Event } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, Event, TransactionOptions } from "@ijstech/eth-contract";
 export interface IDeployParams {
     governance: string;
     pairCreator: string;
@@ -59,7 +59,7 @@ export interface ISetWhiteListParams {
 }
 export declare class OSWAP_OracleFactory extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(params: IDeployParams): Promise<string>;
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>;
     parseOracleAddedEvent(receipt: TransactionReceipt): OSWAP_OracleFactory.OracleAddedEvent[];
     decodeOracleAddedEvent(event: Event): OSWAP_OracleFactory.OracleAddedEvent;
     parseOracleScoresEvent(receipt: TransactionReceipt): OSWAP_OracleFactory.OracleScoresEvent[];
@@ -83,150 +83,150 @@ export declare class OSWAP_OracleFactory extends Contract {
     parseWhitelistedEvent(receipt: TransactionReceipt): OSWAP_OracleFactory.WhitelistedEvent[];
     decodeWhitelistedEvent(event: Event): OSWAP_OracleFactory.WhitelistedEvent;
     addOldOracleToNewPair: {
-        (params: IAddOldOracleToNewPairParams): Promise<TransactionReceipt>;
-        call: (params: IAddOldOracleToNewPairParams) => Promise<void>;
+        (params: IAddOldOracleToNewPairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddOldOracleToNewPairParams, options?: TransactionOptions) => Promise<void>;
     };
     allPairs: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     allPairsLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     allWhiteListed: {
-        (): Promise<{
+        (options?: TransactionOptions): Promise<{
             list: string[];
             allowed: boolean[];
         }>;
     };
     checkAndGetOracle: {
-        (params: ICheckAndGetOracleParams): Promise<string>;
+        (params: ICheckAndGetOracleParams, options?: TransactionOptions): Promise<string>;
     };
     checkAndGetOracleSwapParams: {
-        (params: ICheckAndGetOracleSwapParamsParams): Promise<{
+        (params: ICheckAndGetOracleSwapParamsParams, options?: TransactionOptions): Promise<{
             oracle_: string;
             tradeFee_: BigNumber;
             protocolFee_: BigNumber;
         }>;
     };
     createPair: {
-        (params: ICreatePairParams): Promise<TransactionReceipt>;
-        call: (params: ICreatePairParams) => Promise<string>;
+        (params: ICreatePairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ICreatePairParams, options?: TransactionOptions) => Promise<string>;
     };
     feePerDelegator: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     getPair: {
-        (params: IGetPairParams): Promise<string>;
+        (params: IGetPairParams, options?: TransactionOptions): Promise<string>;
     };
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     isLive: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     };
     isOracle: {
-        (param1: string): Promise<boolean>;
+        (param1: string, options?: TransactionOptions): Promise<boolean>;
     };
     isWhitelisted: {
-        (param1: string): Promise<boolean>;
+        (param1: string, options?: TransactionOptions): Promise<boolean>;
     };
     minLotSize: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     minOracleScore: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     oracleLiquidityProvider: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     oracleScores: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     oracles: {
-        (params: IOraclesParams): Promise<string>;
+        (params: IOraclesParams, options?: TransactionOptions): Promise<string>;
     };
     owner: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     pairCreator: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     protocolFee: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     protocolFeeTo: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     renounceOwnership: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     securityScoreOracle: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     setFeePerDelegator: {
-        (feePerDelegator: number | BigNumber): Promise<TransactionReceipt>;
-        call: (feePerDelegator: number | BigNumber) => Promise<void>;
+        (feePerDelegator: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (feePerDelegator: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     setLive: {
-        (isLive: boolean): Promise<TransactionReceipt>;
-        call: (isLive: boolean) => Promise<void>;
+        (isLive: boolean, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (isLive: boolean, options?: TransactionOptions) => Promise<void>;
     };
     setLiveForPair: {
-        (params: ISetLiveForPairParams): Promise<TransactionReceipt>;
-        call: (params: ISetLiveForPairParams) => Promise<void>;
+        (params: ISetLiveForPairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetLiveForPairParams, options?: TransactionOptions) => Promise<void>;
     };
     setMinLotSize: {
-        (params: ISetMinLotSizeParams): Promise<TransactionReceipt>;
-        call: (params: ISetMinLotSizeParams) => Promise<void>;
+        (params: ISetMinLotSizeParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetMinLotSizeParams, options?: TransactionOptions) => Promise<void>;
     };
     setOracle: {
-        (params: ISetOracleParams): Promise<TransactionReceipt>;
-        call: (params: ISetOracleParams) => Promise<void>;
+        (params: ISetOracleParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetOracleParams, options?: TransactionOptions) => Promise<void>;
     };
     setOracleLiquidityProvider: {
-        (params: ISetOracleLiquidityProviderParams): Promise<TransactionReceipt>;
-        call: (params: ISetOracleLiquidityProviderParams) => Promise<void>;
+        (params: ISetOracleLiquidityProviderParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetOracleLiquidityProviderParams, options?: TransactionOptions) => Promise<void>;
     };
     setProtocolFee: {
-        (protocolFee: number | BigNumber): Promise<TransactionReceipt>;
-        call: (protocolFee: number | BigNumber) => Promise<void>;
+        (protocolFee: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (protocolFee: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     setProtocolFeeTo: {
-        (protocolFeeTo: string): Promise<TransactionReceipt>;
-        call: (protocolFeeTo: string) => Promise<void>;
+        (protocolFeeTo: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (protocolFeeTo: string, options?: TransactionOptions) => Promise<void>;
     };
     setSecurityScoreOracle: {
-        (params: ISetSecurityScoreOracleParams): Promise<TransactionReceipt>;
-        call: (params: ISetSecurityScoreOracleParams) => Promise<void>;
+        (params: ISetSecurityScoreOracleParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetSecurityScoreOracleParams, options?: TransactionOptions) => Promise<void>;
     };
     setTradeFee: {
-        (tradeFee: number | BigNumber): Promise<TransactionReceipt>;
-        call: (tradeFee: number | BigNumber) => Promise<void>;
+        (tradeFee: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (tradeFee: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     setWhiteList: {
-        (params: ISetWhiteListParams): Promise<TransactionReceipt>;
-        call: (params: ISetWhiteListParams) => Promise<void>;
+        (params: ISetWhiteListParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetWhiteListParams, options?: TransactionOptions) => Promise<void>;
     };
     tradeFee: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     transferOwnership: {
-        (newOwner: string): Promise<TransactionReceipt>;
-        call: (newOwner: string) => Promise<void>;
+        (newOwner: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (newOwner: string, options?: TransactionOptions) => Promise<void>;
     };
     updateOracleScore: {
-        (oracle: string): Promise<TransactionReceipt>;
-        call: (oracle: string) => Promise<void>;
+        (oracle: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (oracle: string, options?: TransactionOptions) => Promise<void>;
     };
     whitelisted: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     whitelistedInv: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     whitelistedLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     private assign;
 }

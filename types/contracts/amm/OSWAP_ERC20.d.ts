@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber, Event } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, Event, TransactionOptions } from "@ijstech/eth-contract";
 export interface IAllowanceParams {
     param1: string;
     param2: string;
@@ -27,59 +27,59 @@ export interface ITransferFromParams {
 }
 export declare class OSWAP_ERC20 extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(): Promise<string>;
+    deploy(options?: number | BigNumber | TransactionOptions): Promise<string>;
     parseApprovalEvent(receipt: TransactionReceipt): OSWAP_ERC20.ApprovalEvent[];
     decodeApprovalEvent(event: Event): OSWAP_ERC20.ApprovalEvent;
     parseTransferEvent(receipt: TransactionReceipt): OSWAP_ERC20.TransferEvent[];
     decodeTransferEvent(event: Event): OSWAP_ERC20.TransferEvent;
     EIP712_TYPEHASH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     NAME_HASH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     PERMIT_TYPEHASH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     VERSION_HASH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     allowance: {
-        (params: IAllowanceParams): Promise<BigNumber>;
+        (params: IAllowanceParams, options?: TransactionOptions): Promise<BigNumber>;
     };
     approve: {
-        (params: IApproveParams): Promise<TransactionReceipt>;
-        call: (params: IApproveParams) => Promise<boolean>;
+        (params: IApproveParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IApproveParams, options?: TransactionOptions) => Promise<boolean>;
     };
     balanceOf: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     decimals: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     name: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     nonces: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     permit: {
-        (params: IPermitParams): Promise<TransactionReceipt>;
-        call: (params: IPermitParams) => Promise<void>;
+        (params: IPermitParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IPermitParams, options?: TransactionOptions) => Promise<void>;
     };
     symbol: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     totalSupply: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     transfer: {
-        (params: ITransferParams): Promise<TransactionReceipt>;
-        call: (params: ITransferParams) => Promise<boolean>;
+        (params: ITransferParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ITransferParams, options?: TransactionOptions) => Promise<boolean>;
     };
     transferFrom: {
-        (params: ITransferFromParams): Promise<TransactionReceipt>;
-        call: (params: ITransferFromParams) => Promise<boolean>;
+        (params: ITransferFromParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ITransferFromParams, options?: TransactionOptions) => Promise<boolean>;
     };
     private assign;
 }

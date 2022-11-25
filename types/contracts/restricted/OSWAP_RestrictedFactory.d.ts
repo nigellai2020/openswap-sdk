@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber, Event } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, Event, TransactionOptions } from "@ijstech/eth-contract";
 export interface IDeployParams {
     governance: string;
     whitelistFactory: string;
@@ -49,7 +49,7 @@ export interface ISetOracleParams {
 }
 export declare class OSWAP_RestrictedFactory extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(params: IDeployParams): Promise<string>;
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>;
     parseOracleAddedEvent(receipt: TransactionReceipt): OSWAP_RestrictedFactory.OracleAddedEvent[];
     decodeOracleAddedEvent(event: Event): OSWAP_RestrictedFactory.OracleAddedEvent;
     parseOwnershipTransferredEvent(receipt: TransactionReceipt): OSWAP_RestrictedFactory.OwnershipTransferredEvent[];
@@ -69,34 +69,34 @@ export declare class OSWAP_RestrictedFactory extends Contract {
     parseShutdownedEvent(receipt: TransactionReceipt): OSWAP_RestrictedFactory.ShutdownedEvent[];
     decodeShutdownedEvent(event: Event): OSWAP_RestrictedFactory.ShutdownedEvent;
     addOldOracleToNewPair: {
-        (params: IAddOldOracleToNewPairParams): Promise<TransactionReceipt>;
-        call: (params: IAddOldOracleToNewPairParams) => Promise<void>;
+        (params: IAddOldOracleToNewPairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddOldOracleToNewPairParams, options?: TransactionOptions) => Promise<void>;
     };
     allPairs: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     allPairsLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     checkAndGetOracle: {
-        (params: ICheckAndGetOracleParams): Promise<string>;
+        (params: ICheckAndGetOracleParams, options?: TransactionOptions): Promise<string>;
     };
     checkAndGetOracleSwapParams: {
-        (params: ICheckAndGetOracleSwapParamsParams): Promise<{
+        (params: ICheckAndGetOracleSwapParamsParams, options?: TransactionOptions): Promise<{
             oracle_: string;
             tradeFee_: BigNumber;
             protocolFee_: BigNumber;
         }>;
     };
     configStore: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     createPair: {
-        (params: ICreatePairParams): Promise<TransactionReceipt>;
-        call: (params: ICreatePairParams) => Promise<string>;
+        (params: ICreatePairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ICreatePairParams, options?: TransactionOptions) => Promise<string>;
     };
     getCreateAddresses: {
-        (): Promise<{
+        (options?: TransactionOptions): Promise<{
             _governance: string;
             _whitelistFactory: string;
             _restrictedLiquidityProvider: string;
@@ -104,85 +104,85 @@ export declare class OSWAP_RestrictedFactory extends Contract {
         }>;
     };
     getPair: {
-        (params: IGetPairParams): Promise<string>;
+        (params: IGetPairParams, options?: TransactionOptions): Promise<string>;
     };
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     init: {
-        (restrictedLiquidityProvider: string): Promise<TransactionReceipt>;
-        call: (restrictedLiquidityProvider: string) => Promise<void>;
+        (restrictedLiquidityProvider: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (restrictedLiquidityProvider: string, options?: TransactionOptions) => Promise<void>;
     };
     isLive: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     };
     isOracle: {
-        (param1: string): Promise<boolean>;
+        (param1: string, options?: TransactionOptions): Promise<boolean>;
     };
     isPair: {
-        (pair: string): Promise<boolean>;
+        (pair: string, options?: TransactionOptions): Promise<boolean>;
     };
     oracles: {
-        (params: IOraclesParams): Promise<string>;
+        (params: IOraclesParams, options?: TransactionOptions): Promise<string>;
     };
     owner: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     pairCreator: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     pairIdx: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     pairLength: {
-        (params: IPairLengthParams): Promise<BigNumber>;
+        (params: IPairLengthParams, options?: TransactionOptions): Promise<BigNumber>;
     };
     protocolFee: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     protocolFeeTo: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     renounceOwnership: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     restrictedLiquidityProvider: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     setLive: {
-        (isLive: boolean): Promise<TransactionReceipt>;
-        call: (isLive: boolean) => Promise<void>;
+        (isLive: boolean, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (isLive: boolean, options?: TransactionOptions) => Promise<void>;
     };
     setLiveForPair: {
-        (params: ISetLiveForPairParams): Promise<TransactionReceipt>;
-        call: (params: ISetLiveForPairParams) => Promise<void>;
+        (params: ISetLiveForPairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetLiveForPairParams, options?: TransactionOptions) => Promise<void>;
     };
     setOracle: {
-        (params: ISetOracleParams): Promise<TransactionReceipt>;
-        call: (params: ISetOracleParams) => Promise<void>;
+        (params: ISetOracleParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetOracleParams, options?: TransactionOptions) => Promise<void>;
     };
     setProtocolFee: {
-        (protocolFee: number | BigNumber): Promise<TransactionReceipt>;
-        call: (protocolFee: number | BigNumber) => Promise<void>;
+        (protocolFee: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (protocolFee: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     setProtocolFeeTo: {
-        (protocolFeeTo: string): Promise<TransactionReceipt>;
-        call: (protocolFeeTo: string) => Promise<void>;
+        (protocolFeeTo: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (protocolFeeTo: string, options?: TransactionOptions) => Promise<void>;
     };
     setTradeFee: {
-        (tradeFee: number | BigNumber): Promise<TransactionReceipt>;
-        call: (tradeFee: number | BigNumber) => Promise<void>;
+        (tradeFee: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (tradeFee: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     tradeFee: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     transferOwnership: {
-        (newOwner: string): Promise<TransactionReceipt>;
-        call: (newOwner: string) => Promise<void>;
+        (newOwner: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (newOwner: string, options?: TransactionOptions) => Promise<void>;
     };
     whitelistFactory: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     private assign;
 }

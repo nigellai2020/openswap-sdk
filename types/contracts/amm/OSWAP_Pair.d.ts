@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber, Event } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, Event, TransactionOptions } from "@ijstech/eth-contract";
 export interface IAllowanceParams {
     param1: string;
     param2: string;
@@ -45,7 +45,7 @@ export interface ITransferFromParams {
 }
 export declare class OSWAP_Pair extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(): Promise<string>;
+    deploy(options?: TransactionOptions): Promise<string>;
     parseApprovalEvent(receipt: TransactionReceipt): OSWAP_Pair.ApprovalEvent[];
     decodeApprovalEvent(event: Event): OSWAP_Pair.ApprovalEvent;
     parseBurnEvent(receipt: TransactionReceipt): OSWAP_Pair.BurnEvent[];
@@ -63,135 +63,135 @@ export declare class OSWAP_Pair extends Contract {
     parseTransferEvent(receipt: TransactionReceipt): OSWAP_Pair.TransferEvent[];
     decodeTransferEvent(event: Event): OSWAP_Pair.TransferEvent;
     EIP712_TYPEHASH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     MINIMUM_LIQUIDITY: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     NAME_HASH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     PERMIT_TYPEHASH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     VERSION_HASH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     allowance: {
-        (params: IAllowanceParams): Promise<BigNumber>;
+        (params: IAllowanceParams, options?: TransactionOptions): Promise<BigNumber>;
     };
     approve: {
-        (params: IApproveParams): Promise<TransactionReceipt>;
-        call: (params: IApproveParams) => Promise<boolean>;
+        (params: IApproveParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IApproveParams, options?: TransactionOptions) => Promise<boolean>;
     };
     balanceOf: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     burn: {
-        (to: string): Promise<TransactionReceipt>;
-        call: (to: string) => Promise<{
+        (to: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (to: string, options?: TransactionOptions) => Promise<{
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
     };
     decimals: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     factory: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     getAmountIn: {
-        (params: IGetAmountInParams): Promise<BigNumber>;
+        (params: IGetAmountInParams, options?: TransactionOptions): Promise<BigNumber>;
     };
     getAmountOut: {
-        (params: IGetAmountOutParams): Promise<BigNumber>;
+        (params: IGetAmountOutParams, options?: TransactionOptions): Promise<BigNumber>;
     };
     getReserves: {
-        (): Promise<{
+        (options?: TransactionOptions): Promise<{
             _reserve0: BigNumber;
             _reserve1: BigNumber;
             _blockTimestampLast: BigNumber;
         }>;
     };
     initialize: {
-        (params: IInitializeParams): Promise<TransactionReceipt>;
-        call: (params: IInitializeParams) => Promise<void>;
+        (params: IInitializeParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IInitializeParams, options?: TransactionOptions) => Promise<void>;
     };
     isLive: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     };
     kLast: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     mint: {
-        (to: string): Promise<TransactionReceipt>;
-        call: (to: string) => Promise<BigNumber>;
+        (to: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (to: string, options?: TransactionOptions) => Promise<BigNumber>;
     };
     name: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     nonces: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     permit: {
-        (params: IPermitParams): Promise<TransactionReceipt>;
-        call: (params: IPermitParams) => Promise<void>;
+        (params: IPermitParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IPermitParams, options?: TransactionOptions) => Promise<void>;
     };
     price0CumulativeLast: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     price1CumulativeLast: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     protocolFee: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     setLive: {
-        (isLive: boolean): Promise<TransactionReceipt>;
-        call: (isLive: boolean) => Promise<void>;
+        (isLive: boolean, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (isLive: boolean, options?: TransactionOptions) => Promise<void>;
     };
     skim: {
-        (to: string): Promise<TransactionReceipt>;
-        call: (to: string) => Promise<void>;
+        (to: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (to: string, options?: TransactionOptions) => Promise<void>;
     };
     swap: {
-        (params: ISwapParams): Promise<TransactionReceipt>;
-        call: (params: ISwapParams) => Promise<void>;
+        (params: ISwapParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISwapParams, options?: TransactionOptions) => Promise<void>;
     };
     symbol: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     sync: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     token0: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     token1: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     totalSupply: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     tradeFee: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     transfer: {
-        (params: ITransferParams): Promise<TransactionReceipt>;
-        call: (params: ITransferParams) => Promise<boolean>;
+        (params: ITransferParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ITransferParams, options?: TransactionOptions) => Promise<boolean>;
     };
     transferFrom: {
-        (params: ITransferFromParams): Promise<TransactionReceipt>;
-        call: (params: ITransferFromParams) => Promise<boolean>;
+        (params: ITransferFromParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ITransferFromParams, options?: TransactionOptions) => Promise<boolean>;
     };
     updateFee: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     updateProtocolFee: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     private assign;
 }

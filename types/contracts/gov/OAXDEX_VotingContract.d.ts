@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, TransactionOptions } from "@ijstech/eth-contract";
 export interface IDeployParams {
     governance: string;
     executor: string;
@@ -13,40 +13,40 @@ export interface IDeployParams {
 }
 export declare class OAXDEX_VotingContract extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(params: IDeployParams): Promise<string>;
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>;
     _executeParam: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     _options: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     _optionsWeight: {
-        (param1: number | BigNumber): Promise<BigNumber>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<BigNumber>;
     };
     accountVoteOption: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     accountVoteWeight: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     execute: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     executeDelay: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     executeParam: {
-        (): Promise<string[]>;
+        (options?: TransactionOptions): Promise<string[]>;
     };
     executed: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     };
     executor: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     getParams: {
-        (): Promise<{
+        (options?: TransactionOptions): Promise<{
             executor_: string;
             id_: BigNumber;
             name_: string;
@@ -61,55 +61,55 @@ export declare class OAXDEX_VotingContract extends Contract {
         }>;
     };
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     id: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     name: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     options: {
-        (): Promise<string[]>;
+        (options?: TransactionOptions): Promise<string[]>;
     };
     optionsCount: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     optionsWeight: {
-        (): Promise<BigNumber[]>;
+        (options?: TransactionOptions): Promise<BigNumber[]>;
     };
     quorum: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     threshold: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     totalVoteWeight: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     totalWeight: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     updateWeight: {
-        (account: string): Promise<TransactionReceipt>;
-        call: (account: string) => Promise<void>;
+        (account: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (account: string, options?: TransactionOptions) => Promise<void>;
     };
     veto: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     vetoed: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     };
     vote: {
-        (option: number | BigNumber): Promise<TransactionReceipt>;
-        call: (option: number | BigNumber) => Promise<void>;
+        (option: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (option: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     voteEndTime: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     voteStartTime: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     private assign;
 }

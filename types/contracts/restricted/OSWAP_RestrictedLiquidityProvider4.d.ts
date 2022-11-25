@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, TransactionOptions } from "@ijstech/eth-contract";
 export interface IDeployParams {
     factory: string;
     WETH: string;
@@ -56,56 +56,56 @@ export interface IRemoveLiquidityETHParams {
 }
 export declare class OSWAP_RestrictedLiquidityProvider4 extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(params: IDeployParams): Promise<string>;
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>;
     WETH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     addLiquidity: {
-        (params: IAddLiquidityParams): Promise<TransactionReceipt>;
-        call: (params: IAddLiquidityParams) => Promise<{
+        (params: IAddLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddLiquidityParams, options?: TransactionOptions) => Promise<{
             pair: string;
             _offerIndex: BigNumber;
         }>;
     };
     addLiquidityETH: {
-        (params: IAddLiquidityETHParams, _value: number | BigNumber): Promise<TransactionReceipt>;
-        call: (params: IAddLiquidityETHParams, _value: number | BigNumber) => Promise<{
+        (params: IAddLiquidityETHParams, options?: number | BigNumber | TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddLiquidityETHParams, options?: number | BigNumber | TransactionOptions) => Promise<{
             pair: string;
             _offerIndex: BigNumber;
         }>;
     };
     configStore: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     factory: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     govToken: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     removeAllLiquidity: {
-        (params: IRemoveAllLiquidityParams): Promise<TransactionReceipt>;
-        call: (params: IRemoveAllLiquidityParams) => Promise<{
+        (params: IRemoveAllLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRemoveAllLiquidityParams, options?: TransactionOptions) => Promise<{
             amountA: BigNumber;
             amountB: BigNumber;
             feeOut: BigNumber;
         }>;
     };
     removeAllLiquidityETH: {
-        (params: IRemoveAllLiquidityETHParams): Promise<TransactionReceipt>;
-        call: (params: IRemoveAllLiquidityETHParams) => Promise<{
+        (params: IRemoveAllLiquidityETHParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRemoveAllLiquidityETHParams, options?: TransactionOptions) => Promise<{
             amountToken: BigNumber;
             amountETH: BigNumber;
             feeOut: BigNumber;
         }>;
     };
     removeLiquidity: {
-        (params: IRemoveLiquidityParams): Promise<TransactionReceipt>;
-        call: (params: IRemoveLiquidityParams) => Promise<void>;
+        (params: IRemoveLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRemoveLiquidityParams, options?: TransactionOptions) => Promise<void>;
     };
     removeLiquidityETH: {
-        (params: IRemoveLiquidityETHParams): Promise<TransactionReceipt>;
-        call: (params: IRemoveLiquidityETHParams) => Promise<void>;
+        (params: IRemoveLiquidityETHParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRemoveLiquidityETHParams, options?: TransactionOptions) => Promise<void>;
     };
     private assign;
 }

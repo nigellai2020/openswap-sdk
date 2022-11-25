@@ -1,4 +1,4 @@
-import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj} from "@ijstech/eth-contract";
+import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj, TransactionOptions} from "@ijstech/eth-contract";
 import Bin from "./OSWAP_RestrictedLiquidityProvider1.json";
 
 export interface IDeployParams {factory:string;WETH:string}
@@ -15,81 +15,81 @@ export class OSWAP_RestrictedLiquidityProvider1 extends Contract{
         super(wallet, address, Bin.abi, Bin.bytecode);
         this.assign()
     }
-    deploy(params: IDeployParams): Promise<string>{
-        return this.__deploy([params.factory,params.WETH]);
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>{
+        return this.__deploy([params.factory,params.WETH], options);
     }
     WETH: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     addLiquidity: {
-        (params: IAddLiquidityParams): Promise<TransactionReceipt>;
-        call: (params: IAddLiquidityParams) => Promise<{pair:string,_offerIndex:BigNumber}>;
+        (params: IAddLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddLiquidityParams, options?: TransactionOptions) => Promise<{pair:string,_offerIndex:BigNumber}>;
     }
     addLiquidityAndTrader: {
-        (params: IAddLiquidityAndTraderParams): Promise<TransactionReceipt>;
-        call: (params: IAddLiquidityAndTraderParams) => Promise<{pair:string,offerIndex:BigNumber}>;
+        (params: IAddLiquidityAndTraderParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddLiquidityAndTraderParams, options?: TransactionOptions) => Promise<{pair:string,offerIndex:BigNumber}>;
     }
     addLiquidityETH: {
-        (params: IAddLiquidityETHParams,_value:number|BigNumber): Promise<TransactionReceipt>;
-        call: (params: IAddLiquidityETHParams,_value:number|BigNumber) => Promise<{pair:string,_offerIndex:BigNumber}>;
+        (params: IAddLiquidityETHParams, options?: number|BigNumber|TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddLiquidityETHParams, options?: number|BigNumber|TransactionOptions) => Promise<{pair:string,_offerIndex:BigNumber}>;
     }
     addLiquidityETHAndTrader: {
-        (params: IAddLiquidityETHAndTraderParams,_value:number|BigNumber): Promise<TransactionReceipt>;
-        call: (params: IAddLiquidityETHAndTraderParams,_value:number|BigNumber) => Promise<{pair:string,offerIndex:BigNumber}>;
+        (params: IAddLiquidityETHAndTraderParams, options?: number|BigNumber|TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddLiquidityETHAndTraderParams, options?: number|BigNumber|TransactionOptions) => Promise<{pair:string,offerIndex:BigNumber}>;
     }
     configStore: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     factory: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     govToken: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     removeAllLiquidity: {
-        (params: IRemoveAllLiquidityParams): Promise<TransactionReceipt>;
-        call: (params: IRemoveAllLiquidityParams) => Promise<{amountA:BigNumber,amountB:BigNumber}>;
+        (params: IRemoveAllLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRemoveAllLiquidityParams, options?: TransactionOptions) => Promise<{amountA:BigNumber,amountB:BigNumber}>;
     }
     removeAllLiquidityETH: {
-        (params: IRemoveAllLiquidityETHParams): Promise<TransactionReceipt>;
-        call: (params: IRemoveAllLiquidityETHParams) => Promise<{amountToken:BigNumber,amountETH:BigNumber}>;
+        (params: IRemoveAllLiquidityETHParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRemoveAllLiquidityETHParams, options?: TransactionOptions) => Promise<{amountToken:BigNumber,amountETH:BigNumber}>;
     }
     removeLiquidity: {
-        (params: IRemoveLiquidityParams): Promise<TransactionReceipt>;
-        call: (params: IRemoveLiquidityParams) => Promise<void>;
+        (params: IRemoveLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRemoveLiquidityParams, options?: TransactionOptions) => Promise<void>;
     }
     removeLiquidityETH: {
-        (params: IRemoveLiquidityETHParams): Promise<TransactionReceipt>;
-        call: (params: IRemoveLiquidityETHParams) => Promise<void>;
+        (params: IRemoveLiquidityETHParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRemoveLiquidityETHParams, options?: TransactionOptions) => Promise<void>;
     }
     private assign(){
-        let WETH_call = async (): Promise<string> => {
-            let result = await this.call('WETH');
+        let WETH_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('WETH',[],options);
             return result;
         }
         this.WETH = WETH_call
-        let configStore_call = async (): Promise<string> => {
-            let result = await this.call('configStore');
+        let configStore_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('configStore',[],options);
             return result;
         }
         this.configStore = configStore_call
-        let factory_call = async (): Promise<string> => {
-            let result = await this.call('factory');
+        let factory_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('factory',[],options);
             return result;
         }
         this.factory = factory_call
-        let govToken_call = async (): Promise<string> => {
-            let result = await this.call('govToken');
+        let govToken_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('govToken',[],options);
             return result;
         }
         this.govToken = govToken_call
         let addLiquidityParams = (params: IAddLiquidityParams) => [params.tokenA,params.tokenB,params.addingTokenA,this.wallet.utils.toString(params.pairIndex),this.wallet.utils.toString(params.offerIndex),this.wallet.utils.toString(params.amountIn),params.allowAll,this.wallet.utils.toString(params.restrictedPrice),this.wallet.utils.toString(params.startDate),this.wallet.utils.toString(params.expire),this.wallet.utils.toString(params.deadline)];
-        let addLiquidity_send = async (params: IAddLiquidityParams): Promise<TransactionReceipt> => {
-            let result = await this.send('addLiquidity',addLiquidityParams(params));
+        let addLiquidity_send = async (params: IAddLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('addLiquidity',addLiquidityParams(params),options);
             return result;
         }
-        let addLiquidity_call = async (params: IAddLiquidityParams): Promise<{pair:string,_offerIndex:BigNumber}> => {
-            let result = await this.call('addLiquidity',addLiquidityParams(params));
+        let addLiquidity_call = async (params: IAddLiquidityParams, options?: TransactionOptions): Promise<{pair:string,_offerIndex:BigNumber}> => {
+            let result = await this.call('addLiquidity',addLiquidityParams(params),options);
             return {
                 pair: result.pair,
                 _offerIndex: new BigNumber(result._offerIndex)
@@ -99,12 +99,12 @@ export class OSWAP_RestrictedLiquidityProvider1 extends Contract{
             call:addLiquidity_call
         });
         let addLiquidityAndTraderParams = (params: IAddLiquidityAndTraderParams) => [this.wallet.utils.toString(params.param),params.trader,this.wallet.utils.toString(params.allocation)];
-        let addLiquidityAndTrader_send = async (params: IAddLiquidityAndTraderParams): Promise<TransactionReceipt> => {
-            let result = await this.send('addLiquidityAndTrader',addLiquidityAndTraderParams(params));
+        let addLiquidityAndTrader_send = async (params: IAddLiquidityAndTraderParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('addLiquidityAndTrader',addLiquidityAndTraderParams(params),options);
             return result;
         }
-        let addLiquidityAndTrader_call = async (params: IAddLiquidityAndTraderParams): Promise<{pair:string,offerIndex:BigNumber}> => {
-            let result = await this.call('addLiquidityAndTrader',addLiquidityAndTraderParams(params));
+        let addLiquidityAndTrader_call = async (params: IAddLiquidityAndTraderParams, options?: TransactionOptions): Promise<{pair:string,offerIndex:BigNumber}> => {
+            let result = await this.call('addLiquidityAndTrader',addLiquidityAndTraderParams(params),options);
             return {
                 pair: result.pair,
                 offerIndex: new BigNumber(result.offerIndex)
@@ -114,12 +114,12 @@ export class OSWAP_RestrictedLiquidityProvider1 extends Contract{
             call:addLiquidityAndTrader_call
         });
         let addLiquidityETHParams = (params: IAddLiquidityETHParams) => [params.tokenA,params.addingTokenA,this.wallet.utils.toString(params.pairIndex),this.wallet.utils.toString(params.offerIndex),this.wallet.utils.toString(params.amountAIn),params.allowAll,this.wallet.utils.toString(params.restrictedPrice),this.wallet.utils.toString(params.startDate),this.wallet.utils.toString(params.expire),this.wallet.utils.toString(params.deadline)];
-        let addLiquidityETH_send = async (params: IAddLiquidityETHParams,_value:number|BigNumber): Promise<TransactionReceipt> => {
-            let result = await this.send('addLiquidityETH',addLiquidityETHParams(params), {value:_value});
+        let addLiquidityETH_send = async (params: IAddLiquidityETHParams, options?: number|BigNumber|TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('addLiquidityETH',addLiquidityETHParams(params),options);
             return result;
         }
-        let addLiquidityETH_call = async (params: IAddLiquidityETHParams,_value:number|BigNumber): Promise<{pair:string,_offerIndex:BigNumber}> => {
-            let result = await this.call('addLiquidityETH',addLiquidityETHParams(params), {value:_value});
+        let addLiquidityETH_call = async (params: IAddLiquidityETHParams, options?: number|BigNumber|TransactionOptions): Promise<{pair:string,_offerIndex:BigNumber}> => {
+            let result = await this.call('addLiquidityETH',addLiquidityETHParams(params),options);
             return {
                 pair: result.pair,
                 _offerIndex: new BigNumber(result._offerIndex)
@@ -129,12 +129,12 @@ export class OSWAP_RestrictedLiquidityProvider1 extends Contract{
             call:addLiquidityETH_call
         });
         let addLiquidityETHAndTraderParams = (params: IAddLiquidityETHAndTraderParams) => [this.wallet.utils.toString(params.param),params.trader,this.wallet.utils.toString(params.allocation)];
-        let addLiquidityETHAndTrader_send = async (params: IAddLiquidityETHAndTraderParams,_value:number|BigNumber): Promise<TransactionReceipt> => {
-            let result = await this.send('addLiquidityETHAndTrader',addLiquidityETHAndTraderParams(params), {value:_value});
+        let addLiquidityETHAndTrader_send = async (params: IAddLiquidityETHAndTraderParams, options?: number|BigNumber|TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('addLiquidityETHAndTrader',addLiquidityETHAndTraderParams(params),options);
             return result;
         }
-        let addLiquidityETHAndTrader_call = async (params: IAddLiquidityETHAndTraderParams,_value:number|BigNumber): Promise<{pair:string,offerIndex:BigNumber}> => {
-            let result = await this.call('addLiquidityETHAndTrader',addLiquidityETHAndTraderParams(params), {value:_value});
+        let addLiquidityETHAndTrader_call = async (params: IAddLiquidityETHAndTraderParams, options?: number|BigNumber|TransactionOptions): Promise<{pair:string,offerIndex:BigNumber}> => {
+            let result = await this.call('addLiquidityETHAndTrader',addLiquidityETHAndTraderParams(params),options);
             return {
                 pair: result.pair,
                 offerIndex: new BigNumber(result.offerIndex)
@@ -144,12 +144,12 @@ export class OSWAP_RestrictedLiquidityProvider1 extends Contract{
             call:addLiquidityETHAndTrader_call
         });
         let removeAllLiquidityParams = (params: IRemoveAllLiquidityParams) => [params.tokenA,params.tokenB,params.to,this.wallet.utils.toString(params.pairIndex),this.wallet.utils.toString(params.deadline)];
-        let removeAllLiquidity_send = async (params: IRemoveAllLiquidityParams): Promise<TransactionReceipt> => {
-            let result = await this.send('removeAllLiquidity',removeAllLiquidityParams(params));
+        let removeAllLiquidity_send = async (params: IRemoveAllLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('removeAllLiquidity',removeAllLiquidityParams(params),options);
             return result;
         }
-        let removeAllLiquidity_call = async (params: IRemoveAllLiquidityParams): Promise<{amountA:BigNumber,amountB:BigNumber}> => {
-            let result = await this.call('removeAllLiquidity',removeAllLiquidityParams(params));
+        let removeAllLiquidity_call = async (params: IRemoveAllLiquidityParams, options?: TransactionOptions): Promise<{amountA:BigNumber,amountB:BigNumber}> => {
+            let result = await this.call('removeAllLiquidity',removeAllLiquidityParams(params),options);
             return {
                 amountA: new BigNumber(result.amountA),
                 amountB: new BigNumber(result.amountB)
@@ -159,12 +159,12 @@ export class OSWAP_RestrictedLiquidityProvider1 extends Contract{
             call:removeAllLiquidity_call
         });
         let removeAllLiquidityETHParams = (params: IRemoveAllLiquidityETHParams) => [params.tokenA,params.to,this.wallet.utils.toString(params.pairIndex),this.wallet.utils.toString(params.deadline)];
-        let removeAllLiquidityETH_send = async (params: IRemoveAllLiquidityETHParams): Promise<TransactionReceipt> => {
-            let result = await this.send('removeAllLiquidityETH',removeAllLiquidityETHParams(params));
+        let removeAllLiquidityETH_send = async (params: IRemoveAllLiquidityETHParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('removeAllLiquidityETH',removeAllLiquidityETHParams(params),options);
             return result;
         }
-        let removeAllLiquidityETH_call = async (params: IRemoveAllLiquidityETHParams): Promise<{amountToken:BigNumber,amountETH:BigNumber}> => {
-            let result = await this.call('removeAllLiquidityETH',removeAllLiquidityETHParams(params));
+        let removeAllLiquidityETH_call = async (params: IRemoveAllLiquidityETHParams, options?: TransactionOptions): Promise<{amountToken:BigNumber,amountETH:BigNumber}> => {
+            let result = await this.call('removeAllLiquidityETH',removeAllLiquidityETHParams(params),options);
             return {
                 amountToken: new BigNumber(result.amountToken),
                 amountETH: new BigNumber(result.amountETH)
@@ -174,24 +174,24 @@ export class OSWAP_RestrictedLiquidityProvider1 extends Contract{
             call:removeAllLiquidityETH_call
         });
         let removeLiquidityParams = (params: IRemoveLiquidityParams) => [params.tokenA,params.tokenB,params.removingTokenA,params.to,this.wallet.utils.toString(params.pairIndex),this.wallet.utils.toString(params.offerIndex),this.wallet.utils.toString(params.amountOut),this.wallet.utils.toString(params.receivingOut),this.wallet.utils.toString(params.deadline)];
-        let removeLiquidity_send = async (params: IRemoveLiquidityParams): Promise<TransactionReceipt> => {
-            let result = await this.send('removeLiquidity',removeLiquidityParams(params));
+        let removeLiquidity_send = async (params: IRemoveLiquidityParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('removeLiquidity',removeLiquidityParams(params),options);
             return result;
         }
-        let removeLiquidity_call = async (params: IRemoveLiquidityParams): Promise<void> => {
-            let result = await this.call('removeLiquidity',removeLiquidityParams(params));
+        let removeLiquidity_call = async (params: IRemoveLiquidityParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('removeLiquidity',removeLiquidityParams(params),options);
             return;
         }
         this.removeLiquidity = Object.assign(removeLiquidity_send, {
             call:removeLiquidity_call
         });
         let removeLiquidityETHParams = (params: IRemoveLiquidityETHParams) => [params.tokenA,params.removingTokenA,params.to,this.wallet.utils.toString(params.pairIndex),this.wallet.utils.toString(params.offerIndex),this.wallet.utils.toString(params.amountOut),this.wallet.utils.toString(params.receivingOut),this.wallet.utils.toString(params.deadline)];
-        let removeLiquidityETH_send = async (params: IRemoveLiquidityETHParams): Promise<TransactionReceipt> => {
-            let result = await this.send('removeLiquidityETH',removeLiquidityETHParams(params));
+        let removeLiquidityETH_send = async (params: IRemoveLiquidityETHParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('removeLiquidityETH',removeLiquidityETHParams(params),options);
             return result;
         }
-        let removeLiquidityETH_call = async (params: IRemoveLiquidityETHParams): Promise<void> => {
-            let result = await this.call('removeLiquidityETH',removeLiquidityETHParams(params));
+        let removeLiquidityETH_call = async (params: IRemoveLiquidityETHParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('removeLiquidityETH',removeLiquidityETHParams(params),options);
             return;
         }
         this.removeLiquidityETH = Object.assign(removeLiquidityETH_send, {

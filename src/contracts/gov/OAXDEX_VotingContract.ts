@@ -1,4 +1,4 @@
-import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj} from "@ijstech/eth-contract";
+import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj, TransactionOptions} from "@ijstech/eth-contract";
 import Bin from "./OAXDEX_VotingContract.json";
 
 export interface IDeployParams {governance:string;executor:string;id:number|BigNumber;name:string;options:string[];quorum:number|BigNumber;threshold:number|BigNumber;voteEndTime:number|BigNumber;executeDelay:number|BigNumber;executeParam:string[]}
@@ -7,142 +7,142 @@ export class OAXDEX_VotingContract extends Contract{
         super(wallet, address, Bin.abi, Bin.bytecode);
         this.assign()
     }
-    deploy(params: IDeployParams): Promise<string>{
-        return this.__deploy([params.governance,params.executor,this.wallet.utils.toString(params.id),this.wallet.utils.stringToBytes32(params.name),this.wallet.utils.stringToBytes32(params.options),this.wallet.utils.toString(params.quorum),this.wallet.utils.toString(params.threshold),this.wallet.utils.toString(params.voteEndTime),this.wallet.utils.toString(params.executeDelay),this.wallet.utils.stringToBytes32(params.executeParam)]);
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>{
+        return this.__deploy([params.governance,params.executor,this.wallet.utils.toString(params.id),this.wallet.utils.stringToBytes32(params.name),this.wallet.utils.stringToBytes32(params.options),this.wallet.utils.toString(params.quorum),this.wallet.utils.toString(params.threshold),this.wallet.utils.toString(params.voteEndTime),this.wallet.utils.toString(params.executeDelay),this.wallet.utils.stringToBytes32(params.executeParam)], options);
     }
     _executeParam: {
-        (param1:number|BigNumber): Promise<string>;
+        (param1:number|BigNumber, options?: TransactionOptions): Promise<string>;
     }
     _options: {
-        (param1:number|BigNumber): Promise<string>;
+        (param1:number|BigNumber, options?: TransactionOptions): Promise<string>;
     }
     _optionsWeight: {
-        (param1:number|BigNumber): Promise<BigNumber>;
+        (param1:number|BigNumber, options?: TransactionOptions): Promise<BigNumber>;
     }
     accountVoteOption: {
-        (param1:string): Promise<BigNumber>;
+        (param1:string, options?: TransactionOptions): Promise<BigNumber>;
     }
     accountVoteWeight: {
-        (param1:string): Promise<BigNumber>;
+        (param1:string, options?: TransactionOptions): Promise<BigNumber>;
     }
     execute: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     }
     executeDelay: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     executeParam: {
-        (): Promise<string[]>;
+        (options?: TransactionOptions): Promise<string[]>;
     }
     executed: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     }
     executor: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     getParams: {
-        (): Promise<{executor_:string,id_:BigNumber,name_:string,options_:string[],voteStartTime_:BigNumber,voteEndTime_:BigNumber,executeDelay_:BigNumber,status_:boolean[],optionsWeight_:BigNumber[],quorum_:BigNumber[],executeParam_:string[]}>;
+        (options?: TransactionOptions): Promise<{executor_:string,id_:BigNumber,name_:string,options_:string[],voteStartTime_:BigNumber,voteEndTime_:BigNumber,executeDelay_:BigNumber,status_:boolean[],optionsWeight_:BigNumber[],quorum_:BigNumber[],executeParam_:string[]}>;
     }
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     id: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     name: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     options: {
-        (): Promise<string[]>;
+        (options?: TransactionOptions): Promise<string[]>;
     }
     optionsCount: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     optionsWeight: {
-        (): Promise<BigNumber[]>;
+        (options?: TransactionOptions): Promise<BigNumber[]>;
     }
     quorum: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     threshold: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     totalVoteWeight: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     totalWeight: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     updateWeight: {
-        (account:string): Promise<TransactionReceipt>;
-        call: (account:string) => Promise<void>;
+        (account:string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (account:string, options?: TransactionOptions) => Promise<void>;
     }
     veto: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     }
     vetoed: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     }
     vote: {
-        (option:number|BigNumber): Promise<TransactionReceipt>;
-        call: (option:number|BigNumber) => Promise<void>;
+        (option:number|BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (option:number|BigNumber, options?: TransactionOptions) => Promise<void>;
     }
     voteEndTime: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     voteStartTime: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     private assign(){
-        let _executeParam_call = async (param1:number|BigNumber): Promise<string> => {
-            let result = await this.call('_executeParam',[this.wallet.utils.toString(param1)]);
+        let _executeParam_call = async (param1:number|BigNumber, options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('_executeParam',[this.wallet.utils.toString(param1)],options);
             return result;
         }
         this._executeParam = _executeParam_call
-        let _options_call = async (param1:number|BigNumber): Promise<string> => {
-            let result = await this.call('_options',[this.wallet.utils.toString(param1)]);
+        let _options_call = async (param1:number|BigNumber, options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('_options',[this.wallet.utils.toString(param1)],options);
             return result;
         }
         this._options = _options_call
-        let _optionsWeight_call = async (param1:number|BigNumber): Promise<BigNumber> => {
-            let result = await this.call('_optionsWeight',[this.wallet.utils.toString(param1)]);
+        let _optionsWeight_call = async (param1:number|BigNumber, options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('_optionsWeight',[this.wallet.utils.toString(param1)],options);
             return new BigNumber(result);
         }
         this._optionsWeight = _optionsWeight_call
-        let accountVoteOption_call = async (param1:string): Promise<BigNumber> => {
-            let result = await this.call('accountVoteOption',[param1]);
+        let accountVoteOption_call = async (param1:string, options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('accountVoteOption',[param1],options);
             return new BigNumber(result);
         }
         this.accountVoteOption = accountVoteOption_call
-        let accountVoteWeight_call = async (param1:string): Promise<BigNumber> => {
-            let result = await this.call('accountVoteWeight',[param1]);
+        let accountVoteWeight_call = async (param1:string, options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('accountVoteWeight',[param1],options);
             return new BigNumber(result);
         }
         this.accountVoteWeight = accountVoteWeight_call
-        let executeDelay_call = async (): Promise<BigNumber> => {
-            let result = await this.call('executeDelay');
+        let executeDelay_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('executeDelay',[],options);
             return new BigNumber(result);
         }
         this.executeDelay = executeDelay_call
-        let executeParam_call = async (): Promise<string[]> => {
-            let result = await this.call('executeParam');
+        let executeParam_call = async (options?: TransactionOptions): Promise<string[]> => {
+            let result = await this.call('executeParam',[],options);
             return result;
         }
         this.executeParam = executeParam_call
-        let executed_call = async (): Promise<boolean> => {
-            let result = await this.call('executed');
+        let executed_call = async (options?: TransactionOptions): Promise<boolean> => {
+            let result = await this.call('executed',[],options);
             return result;
         }
         this.executed = executed_call
-        let executor_call = async (): Promise<string> => {
-            let result = await this.call('executor');
+        let executor_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('executor',[],options);
             return result;
         }
         this.executor = executor_call
-        let getParams_call = async (): Promise<{executor_:string,id_:BigNumber,name_:string,options_:string[],voteStartTime_:BigNumber,voteEndTime_:BigNumber,executeDelay_:BigNumber,status_:boolean[],optionsWeight_:BigNumber[],quorum_:BigNumber[],executeParam_:string[]}> => {
-            let result = await this.call('getParams');
+        let getParams_call = async (options?: TransactionOptions): Promise<{executor_:string,id_:BigNumber,name_:string,options_:string[],voteStartTime_:BigNumber,voteEndTime_:BigNumber,executeDelay_:BigNumber,status_:boolean[],optionsWeight_:BigNumber[],quorum_:BigNumber[],executeParam_:string[]}> => {
+            let result = await this.call('getParams',[],options);
             return {
                 executor_: result.executor_,
                 id_: new BigNumber(result.id_),
@@ -158,110 +158,110 @@ export class OAXDEX_VotingContract extends Contract{
             };
         }
         this.getParams = getParams_call
-        let governance_call = async (): Promise<string> => {
-            let result = await this.call('governance');
+        let governance_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('governance',[],options);
             return result;
         }
         this.governance = governance_call
-        let id_call = async (): Promise<BigNumber> => {
-            let result = await this.call('id');
+        let id_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('id',[],options);
             return new BigNumber(result);
         }
         this.id = id_call
-        let name_call = async (): Promise<string> => {
-            let result = await this.call('name');
+        let name_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('name',[],options);
             return result;
         }
         this.name = name_call
-        let options_call = async (): Promise<string[]> => {
-            let result = await this.call('options');
+        let options_call = async (options?: TransactionOptions): Promise<string[]> => {
+            let result = await this.call('options',[],options);
             return result;
         }
         this.options = options_call
-        let optionsCount_call = async (): Promise<BigNumber> => {
-            let result = await this.call('optionsCount');
+        let optionsCount_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('optionsCount',[],options);
             return new BigNumber(result);
         }
         this.optionsCount = optionsCount_call
-        let optionsWeight_call = async (): Promise<BigNumber[]> => {
-            let result = await this.call('optionsWeight');
+        let optionsWeight_call = async (options?: TransactionOptions): Promise<BigNumber[]> => {
+            let result = await this.call('optionsWeight',[],options);
             return result.map(e=>new BigNumber(e));
         }
         this.optionsWeight = optionsWeight_call
-        let quorum_call = async (): Promise<BigNumber> => {
-            let result = await this.call('quorum');
+        let quorum_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('quorum',[],options);
             return new BigNumber(result);
         }
         this.quorum = quorum_call
-        let threshold_call = async (): Promise<BigNumber> => {
-            let result = await this.call('threshold');
+        let threshold_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('threshold',[],options);
             return new BigNumber(result);
         }
         this.threshold = threshold_call
-        let totalVoteWeight_call = async (): Promise<BigNumber> => {
-            let result = await this.call('totalVoteWeight');
+        let totalVoteWeight_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('totalVoteWeight',[],options);
             return new BigNumber(result);
         }
         this.totalVoteWeight = totalVoteWeight_call
-        let totalWeight_call = async (): Promise<BigNumber> => {
-            let result = await this.call('totalWeight');
+        let totalWeight_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('totalWeight',[],options);
             return new BigNumber(result);
         }
         this.totalWeight = totalWeight_call
-        let vetoed_call = async (): Promise<boolean> => {
-            let result = await this.call('vetoed');
+        let vetoed_call = async (options?: TransactionOptions): Promise<boolean> => {
+            let result = await this.call('vetoed',[],options);
             return result;
         }
         this.vetoed = vetoed_call
-        let voteEndTime_call = async (): Promise<BigNumber> => {
-            let result = await this.call('voteEndTime');
+        let voteEndTime_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('voteEndTime',[],options);
             return new BigNumber(result);
         }
         this.voteEndTime = voteEndTime_call
-        let voteStartTime_call = async (): Promise<BigNumber> => {
-            let result = await this.call('voteStartTime');
+        let voteStartTime_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('voteStartTime',[],options);
             return new BigNumber(result);
         }
         this.voteStartTime = voteStartTime_call
-        let execute_send = async (): Promise<TransactionReceipt> => {
-            let result = await this.send('execute');
+        let execute_send = async (options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('execute',[],options);
             return result;
         }
-        let execute_call = async (): Promise<void> => {
-            let result = await this.call('execute');
+        let execute_call = async (options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('execute',[],options);
             return;
         }
         this.execute = Object.assign(execute_send, {
             call:execute_call
         });
-        let updateWeight_send = async (account:string): Promise<TransactionReceipt> => {
-            let result = await this.send('updateWeight',[account]);
+        let updateWeight_send = async (account:string, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('updateWeight',[account],options);
             return result;
         }
-        let updateWeight_call = async (account:string): Promise<void> => {
-            let result = await this.call('updateWeight',[account]);
+        let updateWeight_call = async (account:string, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('updateWeight',[account],options);
             return;
         }
         this.updateWeight = Object.assign(updateWeight_send, {
             call:updateWeight_call
         });
-        let veto_send = async (): Promise<TransactionReceipt> => {
-            let result = await this.send('veto');
+        let veto_send = async (options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('veto',[],options);
             return result;
         }
-        let veto_call = async (): Promise<void> => {
-            let result = await this.call('veto');
+        let veto_call = async (options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('veto',[],options);
             return;
         }
         this.veto = Object.assign(veto_send, {
             call:veto_call
         });
-        let vote_send = async (option:number|BigNumber): Promise<TransactionReceipt> => {
-            let result = await this.send('vote',[this.wallet.utils.toString(option)]);
+        let vote_send = async (option:number|BigNumber, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('vote',[this.wallet.utils.toString(option)],options);
             return result;
         }
-        let vote_call = async (option:number|BigNumber): Promise<void> => {
-            let result = await this.call('vote',[this.wallet.utils.toString(option)]);
+        let vote_call = async (option:number|BigNumber, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('vote',[this.wallet.utils.toString(option)],options);
             return;
         }
         this.vote = Object.assign(vote_send, {

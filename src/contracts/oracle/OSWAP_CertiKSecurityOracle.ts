@@ -1,4 +1,4 @@
-import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj} from "@ijstech/eth-contract";
+import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj, TransactionOptions} from "@ijstech/eth-contract";
 import Bin from "./OSWAP_CertiKSecurityOracle.json";
 
 export class OSWAP_CertiKSecurityOracle extends Contract{
@@ -6,23 +6,23 @@ export class OSWAP_CertiKSecurityOracle extends Contract{
         super(wallet, address, Bin.abi, Bin.bytecode);
         this.assign()
     }
-    deploy(oracleAddress:string): Promise<string>{
-        return this.__deploy([oracleAddress]);
+    deploy(oracleAddress:string, options?: TransactionOptions): Promise<string>{
+        return this.__deploy([oracleAddress], options);
     }
     getSecurityScore: {
-        (oracle:string): Promise<BigNumber>;
+        (oracle:string, options?: TransactionOptions): Promise<BigNumber>;
     }
     oracleAddress: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     private assign(){
-        let getSecurityScore_call = async (oracle:string): Promise<BigNumber> => {
-            let result = await this.call('getSecurityScore',[oracle]);
+        let getSecurityScore_call = async (oracle:string, options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('getSecurityScore',[oracle],options);
             return new BigNumber(result);
         }
         this.getSecurityScore = getSecurityScore_call
-        let oracleAddress_call = async (): Promise<string> => {
-            let result = await this.call('oracleAddress');
+        let oracleAddress_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('oracleAddress',[],options);
             return result;
         }
         this.oracleAddress = oracleAddress_call

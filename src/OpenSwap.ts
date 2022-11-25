@@ -1,5 +1,5 @@
 import {Wallet, Contract, TransactionReceipt, Utils, BigNumber} from "@ijstech/eth-wallet";
-import {OpenSwap as OpenSwapContract} from "./contracts";
+import {OpenSwap as OpenSwapContract} from "./contracts/index";
 
 export class OpenSwap {
     address: string;

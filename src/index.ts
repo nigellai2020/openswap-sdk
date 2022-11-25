@@ -1,4 +1,4 @@
-export * as Contracts from './contracts';
+export * as Contracts from './contracts/index';
 export {
     deploy, 
     deployCoreContracts, 

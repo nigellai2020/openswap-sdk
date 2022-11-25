@@ -1,4 +1,4 @@
-import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj} from "@ijstech/eth-contract";
+import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj, TransactionOptions} from "@ijstech/eth-contract";
 import Bin from "./OSWAP_PausableFactory.json";
 
 export interface ISetLiveForPairParams {pair:string;live:boolean}
@@ -7,8 +7,8 @@ export class OSWAP_PausableFactory extends Contract{
         super(wallet, address, Bin.abi, Bin.bytecode);
         this.assign()
     }
-    deploy(governance:string): Promise<string>{
-        return this.__deploy([governance]);
+    deploy(governance:string, options?: TransactionOptions): Promise<string>{
+        return this.__deploy([governance], options);
     }
     parsePairRestartedEvent(receipt: TransactionReceipt): OSWAP_PausableFactory.PairRestartedEvent[]{
         return this.parseEvents(receipt, "PairRestarted").map(e=>this.decodePairRestartedEvent(e));
@@ -49,48 +49,48 @@ export class OSWAP_PausableFactory extends Contract{
         };
     }
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     isLive: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     }
     setLive: {
-        (isLive:boolean): Promise<TransactionReceipt>;
-        call: (isLive:boolean) => Promise<void>;
+        (isLive:boolean, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (isLive:boolean, options?: TransactionOptions) => Promise<void>;
     }
     setLiveForPair: {
-        (params: ISetLiveForPairParams): Promise<TransactionReceipt>;
-        call: (params: ISetLiveForPairParams) => Promise<void>;
+        (params: ISetLiveForPairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetLiveForPairParams, options?: TransactionOptions) => Promise<void>;
     }
     private assign(){
-        let governance_call = async (): Promise<string> => {
-            let result = await this.call('governance');
+        let governance_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('governance',[],options);
             return result;
         }
         this.governance = governance_call
-        let isLive_call = async (): Promise<boolean> => {
-            let result = await this.call('isLive');
+        let isLive_call = async (options?: TransactionOptions): Promise<boolean> => {
+            let result = await this.call('isLive',[],options);
             return result;
         }
         this.isLive = isLive_call
-        let setLive_send = async (isLive:boolean): Promise<TransactionReceipt> => {
-            let result = await this.send('setLive',[isLive]);
+        let setLive_send = async (isLive:boolean, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('setLive',[isLive],options);
             return result;
         }
-        let setLive_call = async (isLive:boolean): Promise<void> => {
-            let result = await this.call('setLive',[isLive]);
+        let setLive_call = async (isLive:boolean, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('setLive',[isLive],options);
             return;
         }
         this.setLive = Object.assign(setLive_send, {
             call:setLive_call
         });
         let setLiveForPairParams = (params: ISetLiveForPairParams) => [params.pair,params.live];
-        let setLiveForPair_send = async (params: ISetLiveForPairParams): Promise<TransactionReceipt> => {
-            let result = await this.send('setLiveForPair',setLiveForPairParams(params));
+        let setLiveForPair_send = async (params: ISetLiveForPairParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('setLiveForPair',setLiveForPairParams(params),options);
             return result;
         }
-        let setLiveForPair_call = async (params: ISetLiveForPairParams): Promise<void> => {
-            let result = await this.call('setLiveForPair',setLiveForPairParams(params));
+        let setLiveForPair_call = async (params: ISetLiveForPairParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('setLiveForPair',setLiveForPairParams(params),options);
             return;
         }
         this.setLiveForPair = Object.assign(setLiveForPair_send, {

@@ -1,4 +1,4 @@
-import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj} from "@ijstech/eth-contract";
+import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj, TransactionOptions} from "@ijstech/eth-contract";
 import Bin from "./OSWAP_HybridRouterRegistry.json";
 
 export interface IInitParams {name:string[];factory:string[];fee:(number|BigNumber)[];feeBase:(number|BigNumber)[];typeCode:(number|BigNumber)[]}
@@ -18,8 +18,8 @@ export class OSWAP_HybridRouterRegistry extends Contract{
         super(wallet, address, Bin.abi, Bin.bytecode);
         this.assign()
     }
-    deploy(governance:string): Promise<string>{
-        return this.__deploy([governance]);
+    deploy(governance:string, options?: TransactionOptions): Promise<string>{
+        return this.__deploy([governance], options);
     }
     parseCustomPairRegisterEvent(receipt: TransactionReceipt): OSWAP_HybridRouterRegistry.CustomPairRegisterEvent[]{
         return this.parseEvents(receipt, "CustomPairRegister").map(e=>this.decodeCustomPairRegisterEvent(e));
@@ -73,98 +73,98 @@ export class OSWAP_HybridRouterRegistry extends Contract{
         };
     }
     customPairs: {
-        (param1:string): Promise<{fee:BigNumber,feeBase:BigNumber,typeCode:BigNumber}>;
+        (param1:string, options?: TransactionOptions): Promise<{fee:BigNumber,feeBase:BigNumber,typeCode:BigNumber}>;
     }
     execute: {
-        (params:string[]): Promise<TransactionReceipt>;
-        call: (params:string[]) => Promise<void>;
+        (params:string[], options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params:string[], options?: TransactionOptions) => Promise<void>;
     }
     getFee: {
-        (pairAddress:string): Promise<{fee:BigNumber,feeBase:BigNumber}>;
+        (pairAddress:string, options?: TransactionOptions): Promise<{fee:BigNumber,feeBase:BigNumber}>;
     }
     getPairTokens: {
-        (pairAddress:string[]): Promise<{token0:string[],token1:string[]}>;
+        (pairAddress:string[], options?: TransactionOptions): Promise<{token0:string[],token1:string[]}>;
     }
     getTypeCode: {
-        (pairAddress:string): Promise<BigNumber>;
+        (pairAddress:string, options?: TransactionOptions): Promise<BigNumber>;
     }
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     init: {
-        (params: IInitParams): Promise<TransactionReceipt>;
-        call: (params: IInitParams) => Promise<void>;
+        (params: IInitParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IInitParams, options?: TransactionOptions) => Promise<void>;
     }
     owner: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     pairs: {
-        (param1:string): Promise<{factory:string,token0:string,token1:string}>;
+        (param1:string, options?: TransactionOptions): Promise<{factory:string,token0:string,token1:string}>;
     }
     protocolList: {
-        (param1:number|BigNumber): Promise<string>;
+        (param1:number|BigNumber, options?: TransactionOptions): Promise<string>;
     }
     protocolListLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     protocols: {
-        (param1:string): Promise<{name:string,fee:BigNumber,feeBase:BigNumber,typeCode:BigNumber}>;
+        (param1:string, options?: TransactionOptions): Promise<{name:string,fee:BigNumber,feeBase:BigNumber,typeCode:BigNumber}>;
     }
     registerPair: {
-        (params: IRegisterPairParams): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairParams) => Promise<void>;
+        (params: IRegisterPairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairParams, options?: TransactionOptions) => Promise<void>;
     }
     registerPairByAddress: {
-        (params: IRegisterPairByAddressParams): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairByAddressParams) => Promise<void>;
+        (params: IRegisterPairByAddressParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairByAddressParams, options?: TransactionOptions) => Promise<void>;
     }
     registerPairByIndex: {
-        (params: IRegisterPairByIndexParams): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairByIndexParams) => Promise<void>;
+        (params: IRegisterPairByIndexParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairByIndexParams, options?: TransactionOptions) => Promise<void>;
     }
     registerPairByTokens: {
-        (params: IRegisterPairByTokensParams): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairByTokensParams) => Promise<void>;
+        (params: IRegisterPairByTokensParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairByTokensParams, options?: TransactionOptions) => Promise<void>;
     }
     registerPairByTokensV3: {
-        (params: IRegisterPairByTokensV3Params): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairByTokensV3Params) => Promise<void>;
+        (params: IRegisterPairByTokensV3Params, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairByTokensV3Params, options?: TransactionOptions) => Promise<void>;
     }
     registerPairsByAddress: {
-        (params: IRegisterPairsByAddressParams): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairsByAddressParams) => Promise<void>;
+        (params: IRegisterPairsByAddressParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairsByAddressParams, options?: TransactionOptions) => Promise<void>;
     }
     registerPairsByAddress2: {
-        (params: IRegisterPairsByAddress2Params): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairsByAddress2Params) => Promise<void>;
+        (params: IRegisterPairsByAddress2Params, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairsByAddress2Params, options?: TransactionOptions) => Promise<void>;
     }
     registerPairsByIndex: {
-        (params: IRegisterPairsByIndexParams): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairsByIndexParams) => Promise<void>;
+        (params: IRegisterPairsByIndexParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairsByIndexParams, options?: TransactionOptions) => Promise<void>;
     }
     registerPairsByTokens: {
-        (params: IRegisterPairsByTokensParams): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairsByTokensParams) => Promise<void>;
+        (params: IRegisterPairsByTokensParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairsByTokensParams, options?: TransactionOptions) => Promise<void>;
     }
     registerPairsByTokensV3: {
-        (params: IRegisterPairsByTokensV3Params): Promise<TransactionReceipt>;
-        call: (params: IRegisterPairsByTokensV3Params) => Promise<void>;
+        (params: IRegisterPairsByTokensV3Params, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterPairsByTokensV3Params, options?: TransactionOptions) => Promise<void>;
     }
     registerProtocol: {
-        (params: IRegisterProtocolParams): Promise<TransactionReceipt>;
-        call: (params: IRegisterProtocolParams) => Promise<void>;
+        (params: IRegisterProtocolParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IRegisterProtocolParams, options?: TransactionOptions) => Promise<void>;
     }
     renounceOwnership: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     }
     transferOwnership: {
-        (newOwner:string): Promise<TransactionReceipt>;
-        call: (newOwner:string) => Promise<void>;
+        (newOwner:string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (newOwner:string, options?: TransactionOptions) => Promise<void>;
     }
     private assign(){
-        let customPairs_call = async (param1:string): Promise<{fee:BigNumber,feeBase:BigNumber,typeCode:BigNumber}> => {
-            let result = await this.call('customPairs',[param1]);
+        let customPairs_call = async (param1:string, options?: TransactionOptions): Promise<{fee:BigNumber,feeBase:BigNumber,typeCode:BigNumber}> => {
+            let result = await this.call('customPairs',[param1],options);
             return {
                 fee: new BigNumber(result.fee),
                 feeBase: new BigNumber(result.feeBase),
@@ -172,39 +172,39 @@ export class OSWAP_HybridRouterRegistry extends Contract{
             };
         }
         this.customPairs = customPairs_call
-        let getFee_call = async (pairAddress:string): Promise<{fee:BigNumber,feeBase:BigNumber}> => {
-            let result = await this.call('getFee',[pairAddress]);
+        let getFee_call = async (pairAddress:string, options?: TransactionOptions): Promise<{fee:BigNumber,feeBase:BigNumber}> => {
+            let result = await this.call('getFee',[pairAddress],options);
             return {
                 fee: new BigNumber(result.fee),
                 feeBase: new BigNumber(result.feeBase)
             };
         }
         this.getFee = getFee_call
-        let getPairTokens_call = async (pairAddress:string[]): Promise<{token0:string[],token1:string[]}> => {
-            let result = await this.call('getPairTokens',[pairAddress]);
+        let getPairTokens_call = async (pairAddress:string[], options?: TransactionOptions): Promise<{token0:string[],token1:string[]}> => {
+            let result = await this.call('getPairTokens',[pairAddress],options);
             return {
                 token0: result.token0,
                 token1: result.token1
             };
         }
         this.getPairTokens = getPairTokens_call
-        let getTypeCode_call = async (pairAddress:string): Promise<BigNumber> => {
-            let result = await this.call('getTypeCode',[pairAddress]);
+        let getTypeCode_call = async (pairAddress:string, options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('getTypeCode',[pairAddress],options);
             return new BigNumber(result);
         }
         this.getTypeCode = getTypeCode_call
-        let governance_call = async (): Promise<string> => {
-            let result = await this.call('governance');
+        let governance_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('governance',[],options);
             return result;
         }
         this.governance = governance_call
-        let owner_call = async (): Promise<string> => {
-            let result = await this.call('owner');
+        let owner_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('owner',[],options);
             return result;
         }
         this.owner = owner_call
-        let pairs_call = async (param1:string): Promise<{factory:string,token0:string,token1:string}> => {
-            let result = await this.call('pairs',[param1]);
+        let pairs_call = async (param1:string, options?: TransactionOptions): Promise<{factory:string,token0:string,token1:string}> => {
+            let result = await this.call('pairs',[param1],options);
             return {
                 factory: result.factory,
                 token0: result.token0,
@@ -212,18 +212,18 @@ export class OSWAP_HybridRouterRegistry extends Contract{
             };
         }
         this.pairs = pairs_call
-        let protocolList_call = async (param1:number|BigNumber): Promise<string> => {
-            let result = await this.call('protocolList',[this.wallet.utils.toString(param1)]);
+        let protocolList_call = async (param1:number|BigNumber, options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('protocolList',[this.wallet.utils.toString(param1)],options);
             return result;
         }
         this.protocolList = protocolList_call
-        let protocolListLength_call = async (): Promise<BigNumber> => {
-            let result = await this.call('protocolListLength');
+        let protocolListLength_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('protocolListLength',[],options);
             return new BigNumber(result);
         }
         this.protocolListLength = protocolListLength_call
-        let protocols_call = async (param1:string): Promise<{name:string,fee:BigNumber,feeBase:BigNumber,typeCode:BigNumber}> => {
-            let result = await this.call('protocols',[param1]);
+        let protocols_call = async (param1:string, options?: TransactionOptions): Promise<{name:string,fee:BigNumber,feeBase:BigNumber,typeCode:BigNumber}> => {
+            let result = await this.call('protocols',[param1],options);
             return {
                 name: result.name,
                 fee: new BigNumber(result.fee),
@@ -232,178 +232,178 @@ export class OSWAP_HybridRouterRegistry extends Contract{
             };
         }
         this.protocols = protocols_call
-        let execute_send = async (params:string[]): Promise<TransactionReceipt> => {
-            let result = await this.send('execute',[this.wallet.utils.stringToBytes32(params)]);
+        let execute_send = async (params:string[], options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('execute',[this.wallet.utils.stringToBytes32(params)],options);
             return result;
         }
-        let execute_call = async (params:string[]): Promise<void> => {
-            let result = await this.call('execute',[this.wallet.utils.stringToBytes32(params)]);
+        let execute_call = async (params:string[], options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('execute',[this.wallet.utils.stringToBytes32(params)],options);
             return;
         }
         this.execute = Object.assign(execute_send, {
             call:execute_call
         });
         let initParams = (params: IInitParams) => [this.wallet.utils.stringToBytes32(params.name),params.factory,this.wallet.utils.toString(params.fee),this.wallet.utils.toString(params.feeBase),this.wallet.utils.toString(params.typeCode)];
-        let init_send = async (params: IInitParams): Promise<TransactionReceipt> => {
-            let result = await this.send('init',initParams(params));
+        let init_send = async (params: IInitParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('init',initParams(params),options);
             return result;
         }
-        let init_call = async (params: IInitParams): Promise<void> => {
-            let result = await this.call('init',initParams(params));
+        let init_call = async (params: IInitParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('init',initParams(params),options);
             return;
         }
         this.init = Object.assign(init_send, {
             call:init_call
         });
         let registerPairParams = (params: IRegisterPairParams) => [params.token0,params.token1,params.pairAddress,this.wallet.utils.toString(params.fee),this.wallet.utils.toString(params.feeBase),this.wallet.utils.toString(params.typeCode)];
-        let registerPair_send = async (params: IRegisterPairParams): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPair',registerPairParams(params));
+        let registerPair_send = async (params: IRegisterPairParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPair',registerPairParams(params),options);
             return result;
         }
-        let registerPair_call = async (params: IRegisterPairParams): Promise<void> => {
-            let result = await this.call('registerPair',registerPairParams(params));
+        let registerPair_call = async (params: IRegisterPairParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPair',registerPairParams(params),options);
             return;
         }
         this.registerPair = Object.assign(registerPair_send, {
             call:registerPair_call
         });
         let registerPairByAddressParams = (params: IRegisterPairByAddressParams) => [params.factory,params.pairAddress];
-        let registerPairByAddress_send = async (params: IRegisterPairByAddressParams): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairByAddress',registerPairByAddressParams(params));
+        let registerPairByAddress_send = async (params: IRegisterPairByAddressParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairByAddress',registerPairByAddressParams(params),options);
             return result;
         }
-        let registerPairByAddress_call = async (params: IRegisterPairByAddressParams): Promise<void> => {
-            let result = await this.call('registerPairByAddress',registerPairByAddressParams(params));
+        let registerPairByAddress_call = async (params: IRegisterPairByAddressParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairByAddress',registerPairByAddressParams(params),options);
             return;
         }
         this.registerPairByAddress = Object.assign(registerPairByAddress_send, {
             call:registerPairByAddress_call
         });
         let registerPairByIndexParams = (params: IRegisterPairByIndexParams) => [params.factory,this.wallet.utils.toString(params.index)];
-        let registerPairByIndex_send = async (params: IRegisterPairByIndexParams): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairByIndex',registerPairByIndexParams(params));
+        let registerPairByIndex_send = async (params: IRegisterPairByIndexParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairByIndex',registerPairByIndexParams(params),options);
             return result;
         }
-        let registerPairByIndex_call = async (params: IRegisterPairByIndexParams): Promise<void> => {
-            let result = await this.call('registerPairByIndex',registerPairByIndexParams(params));
+        let registerPairByIndex_call = async (params: IRegisterPairByIndexParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairByIndex',registerPairByIndexParams(params),options);
             return;
         }
         this.registerPairByIndex = Object.assign(registerPairByIndex_send, {
             call:registerPairByIndex_call
         });
         let registerPairByTokensParams = (params: IRegisterPairByTokensParams) => [params.factory,params.token0,params.token1];
-        let registerPairByTokens_send = async (params: IRegisterPairByTokensParams): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairByTokens',registerPairByTokensParams(params));
+        let registerPairByTokens_send = async (params: IRegisterPairByTokensParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairByTokens',registerPairByTokensParams(params),options);
             return result;
         }
-        let registerPairByTokens_call = async (params: IRegisterPairByTokensParams): Promise<void> => {
-            let result = await this.call('registerPairByTokens',registerPairByTokensParams(params));
+        let registerPairByTokens_call = async (params: IRegisterPairByTokensParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairByTokens',registerPairByTokensParams(params),options);
             return;
         }
         this.registerPairByTokens = Object.assign(registerPairByTokens_send, {
             call:registerPairByTokens_call
         });
         let registerPairByTokensV3Params = (params: IRegisterPairByTokensV3Params) => [params.factory,params.token0,params.token1,this.wallet.utils.toString(params.pairIndex)];
-        let registerPairByTokensV3_send = async (params: IRegisterPairByTokensV3Params): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairByTokensV3',registerPairByTokensV3Params(params));
+        let registerPairByTokensV3_send = async (params: IRegisterPairByTokensV3Params, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairByTokensV3',registerPairByTokensV3Params(params),options);
             return result;
         }
-        let registerPairByTokensV3_call = async (params: IRegisterPairByTokensV3Params): Promise<void> => {
-            let result = await this.call('registerPairByTokensV3',registerPairByTokensV3Params(params));
+        let registerPairByTokensV3_call = async (params: IRegisterPairByTokensV3Params, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairByTokensV3',registerPairByTokensV3Params(params),options);
             return;
         }
         this.registerPairByTokensV3 = Object.assign(registerPairByTokensV3_send, {
             call:registerPairByTokensV3_call
         });
         let registerPairsByAddressParams = (params: IRegisterPairsByAddressParams) => [params.factory,params.pairAddress];
-        let registerPairsByAddress_send = async (params: IRegisterPairsByAddressParams): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairsByAddress',registerPairsByAddressParams(params));
+        let registerPairsByAddress_send = async (params: IRegisterPairsByAddressParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairsByAddress',registerPairsByAddressParams(params),options);
             return result;
         }
-        let registerPairsByAddress_call = async (params: IRegisterPairsByAddressParams): Promise<void> => {
-            let result = await this.call('registerPairsByAddress',registerPairsByAddressParams(params));
+        let registerPairsByAddress_call = async (params: IRegisterPairsByAddressParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairsByAddress',registerPairsByAddressParams(params),options);
             return;
         }
         this.registerPairsByAddress = Object.assign(registerPairsByAddress_send, {
             call:registerPairsByAddress_call
         });
         let registerPairsByAddress2Params = (params: IRegisterPairsByAddress2Params) => [params.factory,params.pairAddress];
-        let registerPairsByAddress2_send = async (params: IRegisterPairsByAddress2Params): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairsByAddress2',registerPairsByAddress2Params(params));
+        let registerPairsByAddress2_send = async (params: IRegisterPairsByAddress2Params, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairsByAddress2',registerPairsByAddress2Params(params),options);
             return result;
         }
-        let registerPairsByAddress2_call = async (params: IRegisterPairsByAddress2Params): Promise<void> => {
-            let result = await this.call('registerPairsByAddress2',registerPairsByAddress2Params(params));
+        let registerPairsByAddress2_call = async (params: IRegisterPairsByAddress2Params, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairsByAddress2',registerPairsByAddress2Params(params),options);
             return;
         }
         this.registerPairsByAddress2 = Object.assign(registerPairsByAddress2_send, {
             call:registerPairsByAddress2_call
         });
         let registerPairsByIndexParams = (params: IRegisterPairsByIndexParams) => [params.factory,this.wallet.utils.toString(params.index)];
-        let registerPairsByIndex_send = async (params: IRegisterPairsByIndexParams): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairsByIndex',registerPairsByIndexParams(params));
+        let registerPairsByIndex_send = async (params: IRegisterPairsByIndexParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairsByIndex',registerPairsByIndexParams(params),options);
             return result;
         }
-        let registerPairsByIndex_call = async (params: IRegisterPairsByIndexParams): Promise<void> => {
-            let result = await this.call('registerPairsByIndex',registerPairsByIndexParams(params));
+        let registerPairsByIndex_call = async (params: IRegisterPairsByIndexParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairsByIndex',registerPairsByIndexParams(params),options);
             return;
         }
         this.registerPairsByIndex = Object.assign(registerPairsByIndex_send, {
             call:registerPairsByIndex_call
         });
         let registerPairsByTokensParams = (params: IRegisterPairsByTokensParams) => [params.factory,params.token0,params.token1];
-        let registerPairsByTokens_send = async (params: IRegisterPairsByTokensParams): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairsByTokens',registerPairsByTokensParams(params));
+        let registerPairsByTokens_send = async (params: IRegisterPairsByTokensParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairsByTokens',registerPairsByTokensParams(params),options);
             return result;
         }
-        let registerPairsByTokens_call = async (params: IRegisterPairsByTokensParams): Promise<void> => {
-            let result = await this.call('registerPairsByTokens',registerPairsByTokensParams(params));
+        let registerPairsByTokens_call = async (params: IRegisterPairsByTokensParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairsByTokens',registerPairsByTokensParams(params),options);
             return;
         }
         this.registerPairsByTokens = Object.assign(registerPairsByTokens_send, {
             call:registerPairsByTokens_call
         });
         let registerPairsByTokensV3Params = (params: IRegisterPairsByTokensV3Params) => [params.factory,params.token0,params.token1,this.wallet.utils.toString(params.pairIndex)];
-        let registerPairsByTokensV3_send = async (params: IRegisterPairsByTokensV3Params): Promise<TransactionReceipt> => {
-            let result = await this.send('registerPairsByTokensV3',registerPairsByTokensV3Params(params));
+        let registerPairsByTokensV3_send = async (params: IRegisterPairsByTokensV3Params, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerPairsByTokensV3',registerPairsByTokensV3Params(params),options);
             return result;
         }
-        let registerPairsByTokensV3_call = async (params: IRegisterPairsByTokensV3Params): Promise<void> => {
-            let result = await this.call('registerPairsByTokensV3',registerPairsByTokensV3Params(params));
+        let registerPairsByTokensV3_call = async (params: IRegisterPairsByTokensV3Params, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerPairsByTokensV3',registerPairsByTokensV3Params(params),options);
             return;
         }
         this.registerPairsByTokensV3 = Object.assign(registerPairsByTokensV3_send, {
             call:registerPairsByTokensV3_call
         });
         let registerProtocolParams = (params: IRegisterProtocolParams) => [this.wallet.utils.stringToBytes32(params.name),params.factory,this.wallet.utils.toString(params.fee),this.wallet.utils.toString(params.feeBase),this.wallet.utils.toString(params.typeCode)];
-        let registerProtocol_send = async (params: IRegisterProtocolParams): Promise<TransactionReceipt> => {
-            let result = await this.send('registerProtocol',registerProtocolParams(params));
+        let registerProtocol_send = async (params: IRegisterProtocolParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('registerProtocol',registerProtocolParams(params),options);
             return result;
         }
-        let registerProtocol_call = async (params: IRegisterProtocolParams): Promise<void> => {
-            let result = await this.call('registerProtocol',registerProtocolParams(params));
+        let registerProtocol_call = async (params: IRegisterProtocolParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('registerProtocol',registerProtocolParams(params),options);
             return;
         }
         this.registerProtocol = Object.assign(registerProtocol_send, {
             call:registerProtocol_call
         });
-        let renounceOwnership_send = async (): Promise<TransactionReceipt> => {
-            let result = await this.send('renounceOwnership');
+        let renounceOwnership_send = async (options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('renounceOwnership',[],options);
             return result;
         }
-        let renounceOwnership_call = async (): Promise<void> => {
-            let result = await this.call('renounceOwnership');
+        let renounceOwnership_call = async (options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('renounceOwnership',[],options);
             return;
         }
         this.renounceOwnership = Object.assign(renounceOwnership_send, {
             call:renounceOwnership_call
         });
-        let transferOwnership_send = async (newOwner:string): Promise<TransactionReceipt> => {
-            let result = await this.send('transferOwnership',[newOwner]);
+        let transferOwnership_send = async (newOwner:string, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('transferOwnership',[newOwner],options);
             return result;
         }
-        let transferOwnership_call = async (newOwner:string): Promise<void> => {
-            let result = await this.call('transferOwnership',[newOwner]);
+        let transferOwnership_call = async (newOwner:string, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('transferOwnership',[newOwner],options);
             return;
         }
         this.transferOwnership = Object.assign(transferOwnership_send, {

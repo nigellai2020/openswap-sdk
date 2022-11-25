@@ -1,4 +1,4 @@
-import { IWallet, Contract, TransactionReceipt, BigNumber, Event } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, BigNumber, Event, TransactionOptions } from "@ijstech/eth-contract";
 export interface IDeployParams {
     oaxToken: string;
     votingToken: string;
@@ -46,7 +46,7 @@ export interface IVotedParams {
 }
 export declare class OAXDEX_Governance extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(params: IDeployParams): Promise<string>;
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>;
     parseAddVotingConfigEvent(receipt: TransactionReceipt): OAXDEX_Governance.AddVotingConfigEvent[];
     decodeAddVotingConfigEvent(event: Event): OAXDEX_Governance.AddVotingConfigEvent;
     parseExecutedEvent(receipt: TransactionReceipt): OAXDEX_Governance.ExecutedEvent[];
@@ -74,41 +74,41 @@ export declare class OAXDEX_Governance extends Contract {
     parseVoteEvent(receipt: TransactionReceipt): OAXDEX_Governance.VoteEvent[];
     decodeVoteEvent(event: Event): OAXDEX_Governance.VoteEvent;
     addVotingConfig: {
-        (params: IAddVotingConfigParams): Promise<TransactionReceipt>;
-        call: (params: IAddVotingConfigParams) => Promise<void>;
+        (params: IAddVotingConfigParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddVotingConfigParams, options?: TransactionOptions) => Promise<void>;
     };
     admin: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     allVotings: {
-        (): Promise<string[]>;
+        (options?: TransactionOptions): Promise<string[]>;
     };
     closeVote: {
-        (vote: string): Promise<TransactionReceipt>;
-        call: (vote: string) => Promise<void>;
+        (vote: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (vote: string, options?: TransactionOptions) => Promise<void>;
     };
     executed: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     freezedStake: {
-        (param1: string): Promise<{
+        (param1: string, options?: TransactionOptions): Promise<{
             amount: BigNumber;
             timestamp: BigNumber;
         }>;
     };
     getNewVoteId: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<BigNumber>;
     };
     getVotingConfigProfiles: {
-        (params: IGetVotingConfigProfilesParams): Promise<string[]>;
+        (params: IGetVotingConfigProfilesParams, options?: TransactionOptions): Promise<string[]>;
     };
     getVotingCount: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     getVotingParams: {
-        (name: string): Promise<{
+        (name: string, options?: TransactionOptions): Promise<{
             _minExeDelay: BigNumber;
             _minVoteDuration: BigNumber;
             _maxVoteDuration: BigNumber;
@@ -117,100 +117,100 @@ export declare class OAXDEX_Governance extends Contract {
         }>;
     };
     getVotings: {
-        (params: IGetVotingsParams): Promise<string[]>;
+        (params: IGetVotingsParams, options?: TransactionOptions): Promise<string[]>;
     };
     initAdmin: {
-        (admin: string): Promise<TransactionReceipt>;
-        call: (admin: string) => Promise<void>;
+        (admin: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (admin: string, options?: TransactionOptions) => Promise<void>;
     };
     initVotingExecutor: {
-        (votingExecutor: string[]): Promise<TransactionReceipt>;
-        call: (votingExecutor: string[]) => Promise<void>;
+        (votingExecutor: string[], options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (votingExecutor: string[], options?: TransactionOptions) => Promise<void>;
     };
     isVotingContract: {
-        (votingContract: string): Promise<boolean>;
+        (votingContract: string, options?: TransactionOptions): Promise<boolean>;
     };
     isVotingExecutor: {
-        (param1: string): Promise<boolean>;
+        (param1: string, options?: TransactionOptions): Promise<boolean>;
     };
     minStakePeriod: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     newVote: {
-        (params: INewVoteParams): Promise<TransactionReceipt>;
-        call: (params: INewVoteParams) => Promise<void>;
+        (params: INewVoteParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: INewVoteParams, options?: TransactionOptions) => Promise<void>;
     };
     oaxToken: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     owner: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     renounceOwnership: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     setAdmin: {
-        (admin: string): Promise<TransactionReceipt>;
-        call: (admin: string) => Promise<void>;
+        (admin: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (admin: string, options?: TransactionOptions) => Promise<void>;
     };
     setMinStakePeriod: {
-        (minStakePeriod: number | BigNumber): Promise<TransactionReceipt>;
-        call: (minStakePeriod: number | BigNumber) => Promise<void>;
+        (minStakePeriod: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (minStakePeriod: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     setVotingConfig: {
-        (params: ISetVotingConfigParams): Promise<TransactionReceipt>;
-        call: (params: ISetVotingConfigParams) => Promise<void>;
+        (params: ISetVotingConfigParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetVotingConfigParams, options?: TransactionOptions) => Promise<void>;
     };
     setVotingExecutor: {
-        (params: ISetVotingExecutorParams): Promise<TransactionReceipt>;
-        call: (params: ISetVotingExecutorParams) => Promise<void>;
+        (params: ISetVotingExecutorParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetVotingExecutorParams, options?: TransactionOptions) => Promise<void>;
     };
     setVotingRegister: {
-        (votingRegister: string): Promise<TransactionReceipt>;
-        call: (votingRegister: string) => Promise<void>;
+        (votingRegister: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (votingRegister: string, options?: TransactionOptions) => Promise<void>;
     };
     stake: {
-        (value: number | BigNumber): Promise<TransactionReceipt>;
-        call: (value: number | BigNumber) => Promise<void>;
+        (value: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (value: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     stakeOf: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     totalStake: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     transferOwnership: {
-        (newOwner: string): Promise<TransactionReceipt>;
-        call: (newOwner: string) => Promise<void>;
+        (newOwner: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (newOwner: string, options?: TransactionOptions) => Promise<void>;
     };
     unlockStake: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     };
     unstake: {
-        (value: number | BigNumber): Promise<TransactionReceipt>;
-        call: (value: number | BigNumber) => Promise<void>;
+        (value: number | BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (value: number | BigNumber, options?: TransactionOptions) => Promise<void>;
     };
     veto: {
-        (voting: string): Promise<TransactionReceipt>;
-        call: (voting: string) => Promise<void>;
+        (voting: string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (voting: string, options?: TransactionOptions) => Promise<void>;
     };
     voteCount: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     voted: {
-        (params: IVotedParams): Promise<TransactionReceipt>;
-        call: (params: IVotedParams) => Promise<void>;
+        (params: IVotedParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IVotedParams, options?: TransactionOptions) => Promise<void>;
     };
     votingConfigProfiles: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     votingConfigProfilesLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     votingConfigs: {
-        (param1: string): Promise<{
+        (param1: string, options?: TransactionOptions): Promise<{
             minExeDelay: BigNumber;
             minVoteDuration: BigNumber;
             maxVoteDuration: BigNumber;
@@ -219,25 +219,25 @@ export declare class OAXDEX_Governance extends Contract {
         }>;
     };
     votingExecutor: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     votingExecutorInv: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     votingExecutorLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     };
     votingIdx: {
-        (param1: string): Promise<BigNumber>;
+        (param1: string, options?: TransactionOptions): Promise<BigNumber>;
     };
     votingRegister: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     votingToken: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     votings: {
-        (param1: number | BigNumber): Promise<string>;
+        (param1: number | BigNumber, options?: TransactionOptions): Promise<string>;
     };
     private assign;
 }

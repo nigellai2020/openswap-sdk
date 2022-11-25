@@ -1,4 +1,4 @@
-import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj} from "@ijstech/eth-contract";
+import {IWallet, Contract, Transaction, TransactionReceipt, BigNumber, Event, IBatchRequestObj, TransactionOptions} from "@ijstech/eth-contract";
 import Bin from "./OAXDEX_Governance.json";
 
 export interface IDeployParams {oaxToken:string;votingToken:string;names:string[];minExeDelay:(number|BigNumber)[];minVoteDuration:(number|BigNumber)[];maxVoteDuration:(number|BigNumber)[];minOaxTokenToCreateVote:(number|BigNumber)[];minQuorum:(number|BigNumber)[];minStakePeriod:number|BigNumber}
@@ -14,8 +14,8 @@ export class OAXDEX_Governance extends Contract{
         super(wallet, address, Bin.abi, Bin.bytecode);
         this.assign()
     }
-    deploy(params: IDeployParams): Promise<string>{
-        return this.__deploy([params.oaxToken,params.votingToken,this.wallet.utils.stringToBytes32(params.names),this.wallet.utils.toString(params.minExeDelay),this.wallet.utils.toString(params.minVoteDuration),this.wallet.utils.toString(params.maxVoteDuration),this.wallet.utils.toString(params.minOaxTokenToCreateVote),this.wallet.utils.toString(params.minQuorum),this.wallet.utils.toString(params.minStakePeriod)]);
+    deploy(params: IDeployParams, options?: TransactionOptions): Promise<string>{
+        return this.__deploy([params.oaxToken,params.votingToken,this.wallet.utils.stringToBytes32(params.names),this.wallet.utils.toString(params.minExeDelay),this.wallet.utils.toString(params.minVoteDuration),this.wallet.utils.toString(params.maxVoteDuration),this.wallet.utils.toString(params.minOaxTokenToCreateVote),this.wallet.utils.toString(params.minQuorum),this.wallet.utils.toString(params.minStakePeriod)], options);
     }
     parseAddVotingConfigEvent(receipt: TransactionReceipt): OAXDEX_Governance.AddVotingConfigEvent[]{
         return this.parseEvents(receipt, "AddVotingConfig").map(e=>this.decodeAddVotingConfigEvent(e));
@@ -165,169 +165,169 @@ export class OAXDEX_Governance extends Contract{
         };
     }
     addVotingConfig: {
-        (params: IAddVotingConfigParams): Promise<TransactionReceipt>;
-        call: (params: IAddVotingConfigParams) => Promise<void>;
+        (params: IAddVotingConfigParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IAddVotingConfigParams, options?: TransactionOptions) => Promise<void>;
     }
     admin: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     allVotings: {
-        (): Promise<string[]>;
+        (options?: TransactionOptions): Promise<string[]>;
     }
     closeVote: {
-        (vote:string): Promise<TransactionReceipt>;
-        call: (vote:string) => Promise<void>;
+        (vote:string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (vote:string, options?: TransactionOptions) => Promise<void>;
     }
     executed: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     }
     freezedStake: {
-        (param1:string): Promise<{amount:BigNumber,timestamp:BigNumber}>;
+        (param1:string, options?: TransactionOptions): Promise<{amount:BigNumber,timestamp:BigNumber}>;
     }
     getNewVoteId: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<BigNumber>;
     }
     getVotingConfigProfiles: {
-        (params: IGetVotingConfigProfilesParams): Promise<string[]>;
+        (params: IGetVotingConfigProfilesParams, options?: TransactionOptions): Promise<string[]>;
     }
     getVotingCount: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     getVotingParams: {
-        (name:string): Promise<{_minExeDelay:BigNumber,_minVoteDuration:BigNumber,_maxVoteDuration:BigNumber,_minOaxTokenToCreateVote:BigNumber,_minQuorum:BigNumber}>;
+        (name:string, options?: TransactionOptions): Promise<{_minExeDelay:BigNumber,_minVoteDuration:BigNumber,_maxVoteDuration:BigNumber,_minOaxTokenToCreateVote:BigNumber,_minQuorum:BigNumber}>;
     }
     getVotings: {
-        (params: IGetVotingsParams): Promise<string[]>;
+        (params: IGetVotingsParams, options?: TransactionOptions): Promise<string[]>;
     }
     initAdmin: {
-        (admin:string): Promise<TransactionReceipt>;
-        call: (admin:string) => Promise<void>;
+        (admin:string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (admin:string, options?: TransactionOptions) => Promise<void>;
     }
     initVotingExecutor: {
-        (votingExecutor:string[]): Promise<TransactionReceipt>;
-        call: (votingExecutor:string[]) => Promise<void>;
+        (votingExecutor:string[], options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (votingExecutor:string[], options?: TransactionOptions) => Promise<void>;
     }
     isVotingContract: {
-        (votingContract:string): Promise<boolean>;
+        (votingContract:string, options?: TransactionOptions): Promise<boolean>;
     }
     isVotingExecutor: {
-        (param1:string): Promise<boolean>;
+        (param1:string, options?: TransactionOptions): Promise<boolean>;
     }
     minStakePeriod: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     newVote: {
-        (params: INewVoteParams): Promise<TransactionReceipt>;
-        call: (params: INewVoteParams) => Promise<void>;
+        (params: INewVoteParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: INewVoteParams, options?: TransactionOptions) => Promise<void>;
     }
     oaxToken: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     owner: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     renounceOwnership: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     }
     setAdmin: {
-        (admin:string): Promise<TransactionReceipt>;
-        call: (admin:string) => Promise<void>;
+        (admin:string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (admin:string, options?: TransactionOptions) => Promise<void>;
     }
     setMinStakePeriod: {
-        (minStakePeriod:number|BigNumber): Promise<TransactionReceipt>;
-        call: (minStakePeriod:number|BigNumber) => Promise<void>;
+        (minStakePeriod:number|BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (minStakePeriod:number|BigNumber, options?: TransactionOptions) => Promise<void>;
     }
     setVotingConfig: {
-        (params: ISetVotingConfigParams): Promise<TransactionReceipt>;
-        call: (params: ISetVotingConfigParams) => Promise<void>;
+        (params: ISetVotingConfigParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetVotingConfigParams, options?: TransactionOptions) => Promise<void>;
     }
     setVotingExecutor: {
-        (params: ISetVotingExecutorParams): Promise<TransactionReceipt>;
-        call: (params: ISetVotingExecutorParams) => Promise<void>;
+        (params: ISetVotingExecutorParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetVotingExecutorParams, options?: TransactionOptions) => Promise<void>;
     }
     setVotingRegister: {
-        (votingRegister:string): Promise<TransactionReceipt>;
-        call: (votingRegister:string) => Promise<void>;
+        (votingRegister:string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (votingRegister:string, options?: TransactionOptions) => Promise<void>;
     }
     stake: {
-        (value:number|BigNumber): Promise<TransactionReceipt>;
-        call: (value:number|BigNumber) => Promise<void>;
+        (value:number|BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (value:number|BigNumber, options?: TransactionOptions) => Promise<void>;
     }
     stakeOf: {
-        (param1:string): Promise<BigNumber>;
+        (param1:string, options?: TransactionOptions): Promise<BigNumber>;
     }
     totalStake: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     transferOwnership: {
-        (newOwner:string): Promise<TransactionReceipt>;
-        call: (newOwner:string) => Promise<void>;
+        (newOwner:string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (newOwner:string, options?: TransactionOptions) => Promise<void>;
     }
     unlockStake: {
-        (): Promise<TransactionReceipt>;
-        call: () => Promise<void>;
+        (options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (options?: TransactionOptions) => Promise<void>;
     }
     unstake: {
-        (value:number|BigNumber): Promise<TransactionReceipt>;
-        call: (value:number|BigNumber) => Promise<void>;
+        (value:number|BigNumber, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (value:number|BigNumber, options?: TransactionOptions) => Promise<void>;
     }
     veto: {
-        (voting:string): Promise<TransactionReceipt>;
-        call: (voting:string) => Promise<void>;
+        (voting:string, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (voting:string, options?: TransactionOptions) => Promise<void>;
     }
     voteCount: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     voted: {
-        (params: IVotedParams): Promise<TransactionReceipt>;
-        call: (params: IVotedParams) => Promise<void>;
+        (params: IVotedParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: IVotedParams, options?: TransactionOptions) => Promise<void>;
     }
     votingConfigProfiles: {
-        (param1:number|BigNumber): Promise<string>;
+        (param1:number|BigNumber, options?: TransactionOptions): Promise<string>;
     }
     votingConfigProfilesLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     votingConfigs: {
-        (param1:string): Promise<{minExeDelay:BigNumber,minVoteDuration:BigNumber,maxVoteDuration:BigNumber,minOaxTokenToCreateVote:BigNumber,minQuorum:BigNumber}>;
+        (param1:string, options?: TransactionOptions): Promise<{minExeDelay:BigNumber,minVoteDuration:BigNumber,maxVoteDuration:BigNumber,minOaxTokenToCreateVote:BigNumber,minQuorum:BigNumber}>;
     }
     votingExecutor: {
-        (param1:number|BigNumber): Promise<string>;
+        (param1:number|BigNumber, options?: TransactionOptions): Promise<string>;
     }
     votingExecutorInv: {
-        (param1:string): Promise<BigNumber>;
+        (param1:string, options?: TransactionOptions): Promise<BigNumber>;
     }
     votingExecutorLength: {
-        (): Promise<BigNumber>;
+        (options?: TransactionOptions): Promise<BigNumber>;
     }
     votingIdx: {
-        (param1:string): Promise<BigNumber>;
+        (param1:string, options?: TransactionOptions): Promise<BigNumber>;
     }
     votingRegister: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     votingToken: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     }
     votings: {
-        (param1:number|BigNumber): Promise<string>;
+        (param1:number|BigNumber, options?: TransactionOptions): Promise<string>;
     }
     private assign(){
-        let admin_call = async (): Promise<string> => {
-            let result = await this.call('admin');
+        let admin_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('admin',[],options);
             return result;
         }
         this.admin = admin_call
-        let allVotings_call = async (): Promise<string[]> => {
-            let result = await this.call('allVotings');
+        let allVotings_call = async (options?: TransactionOptions): Promise<string[]> => {
+            let result = await this.call('allVotings',[],options);
             return result;
         }
         this.allVotings = allVotings_call
-        let freezedStake_call = async (param1:string): Promise<{amount:BigNumber,timestamp:BigNumber}> => {
-            let result = await this.call('freezedStake',[param1]);
+        let freezedStake_call = async (param1:string, options?: TransactionOptions): Promise<{amount:BigNumber,timestamp:BigNumber}> => {
+            let result = await this.call('freezedStake',[param1],options);
             return {
                 amount: new BigNumber(result.amount),
                 timestamp: new BigNumber(result.timestamp)
@@ -335,18 +335,18 @@ export class OAXDEX_Governance extends Contract{
         }
         this.freezedStake = freezedStake_call
         let getVotingConfigProfilesParams = (params: IGetVotingConfigProfilesParams) => [this.wallet.utils.toString(params.start),this.wallet.utils.toString(params.length)];
-        let getVotingConfigProfiles_call = async (params: IGetVotingConfigProfilesParams): Promise<string[]> => {
-            let result = await this.call('getVotingConfigProfiles',getVotingConfigProfilesParams(params));
+        let getVotingConfigProfiles_call = async (params: IGetVotingConfigProfilesParams, options?: TransactionOptions): Promise<string[]> => {
+            let result = await this.call('getVotingConfigProfiles',getVotingConfigProfilesParams(params),options);
             return result;
         }
         this.getVotingConfigProfiles = getVotingConfigProfiles_call
-        let getVotingCount_call = async (): Promise<BigNumber> => {
-            let result = await this.call('getVotingCount');
+        let getVotingCount_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('getVotingCount',[],options);
             return new BigNumber(result);
         }
         this.getVotingCount = getVotingCount_call
-        let getVotingParams_call = async (name:string): Promise<{_minExeDelay:BigNumber,_minVoteDuration:BigNumber,_maxVoteDuration:BigNumber,_minOaxTokenToCreateVote:BigNumber,_minQuorum:BigNumber}> => {
-            let result = await this.call('getVotingParams',[this.wallet.utils.stringToBytes32(name)]);
+        let getVotingParams_call = async (name:string, options?: TransactionOptions): Promise<{_minExeDelay:BigNumber,_minVoteDuration:BigNumber,_maxVoteDuration:BigNumber,_minOaxTokenToCreateVote:BigNumber,_minQuorum:BigNumber}> => {
+            let result = await this.call('getVotingParams',[this.wallet.utils.stringToBytes32(name)],options);
             return {
                 _minExeDelay: new BigNumber(result._minExeDelay),
                 _minVoteDuration: new BigNumber(result._minVoteDuration),
@@ -357,63 +357,63 @@ export class OAXDEX_Governance extends Contract{
         }
         this.getVotingParams = getVotingParams_call
         let getVotingsParams = (params: IGetVotingsParams) => [this.wallet.utils.toString(params.start),this.wallet.utils.toString(params.count)];
-        let getVotings_call = async (params: IGetVotingsParams): Promise<string[]> => {
-            let result = await this.call('getVotings',getVotingsParams(params));
+        let getVotings_call = async (params: IGetVotingsParams, options?: TransactionOptions): Promise<string[]> => {
+            let result = await this.call('getVotings',getVotingsParams(params),options);
             return result;
         }
         this.getVotings = getVotings_call
-        let isVotingContract_call = async (votingContract:string): Promise<boolean> => {
-            let result = await this.call('isVotingContract',[votingContract]);
+        let isVotingContract_call = async (votingContract:string, options?: TransactionOptions): Promise<boolean> => {
+            let result = await this.call('isVotingContract',[votingContract],options);
             return result;
         }
         this.isVotingContract = isVotingContract_call
-        let isVotingExecutor_call = async (param1:string): Promise<boolean> => {
-            let result = await this.call('isVotingExecutor',[param1]);
+        let isVotingExecutor_call = async (param1:string, options?: TransactionOptions): Promise<boolean> => {
+            let result = await this.call('isVotingExecutor',[param1],options);
             return result;
         }
         this.isVotingExecutor = isVotingExecutor_call
-        let minStakePeriod_call = async (): Promise<BigNumber> => {
-            let result = await this.call('minStakePeriod');
+        let minStakePeriod_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('minStakePeriod',[],options);
             return new BigNumber(result);
         }
         this.minStakePeriod = minStakePeriod_call
-        let oaxToken_call = async (): Promise<string> => {
-            let result = await this.call('oaxToken');
+        let oaxToken_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('oaxToken',[],options);
             return result;
         }
         this.oaxToken = oaxToken_call
-        let owner_call = async (): Promise<string> => {
-            let result = await this.call('owner');
+        let owner_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('owner',[],options);
             return result;
         }
         this.owner = owner_call
-        let stakeOf_call = async (param1:string): Promise<BigNumber> => {
-            let result = await this.call('stakeOf',[param1]);
+        let stakeOf_call = async (param1:string, options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('stakeOf',[param1],options);
             return new BigNumber(result);
         }
         this.stakeOf = stakeOf_call
-        let totalStake_call = async (): Promise<BigNumber> => {
-            let result = await this.call('totalStake');
+        let totalStake_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('totalStake',[],options);
             return new BigNumber(result);
         }
         this.totalStake = totalStake_call
-        let voteCount_call = async (): Promise<BigNumber> => {
-            let result = await this.call('voteCount');
+        let voteCount_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('voteCount',[],options);
             return new BigNumber(result);
         }
         this.voteCount = voteCount_call
-        let votingConfigProfiles_call = async (param1:number|BigNumber): Promise<string> => {
-            let result = await this.call('votingConfigProfiles',[this.wallet.utils.toString(param1)]);
+        let votingConfigProfiles_call = async (param1:number|BigNumber, options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('votingConfigProfiles',[this.wallet.utils.toString(param1)],options);
             return result;
         }
         this.votingConfigProfiles = votingConfigProfiles_call
-        let votingConfigProfilesLength_call = async (): Promise<BigNumber> => {
-            let result = await this.call('votingConfigProfilesLength');
+        let votingConfigProfilesLength_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('votingConfigProfilesLength',[],options);
             return new BigNumber(result);
         }
         this.votingConfigProfilesLength = votingConfigProfilesLength_call
-        let votingConfigs_call = async (param1:string): Promise<{minExeDelay:BigNumber,minVoteDuration:BigNumber,maxVoteDuration:BigNumber,minOaxTokenToCreateVote:BigNumber,minQuorum:BigNumber}> => {
-            let result = await this.call('votingConfigs',[this.wallet.utils.stringToBytes32(param1)]);
+        let votingConfigs_call = async (param1:string, options?: TransactionOptions): Promise<{minExeDelay:BigNumber,minVoteDuration:BigNumber,maxVoteDuration:BigNumber,minOaxTokenToCreateVote:BigNumber,minQuorum:BigNumber}> => {
+            let result = await this.call('votingConfigs',[this.wallet.utils.stringToBytes32(param1)],options);
             return {
                 minExeDelay: new BigNumber(result.minExeDelay),
                 minVoteDuration: new BigNumber(result.minVoteDuration),
@@ -423,250 +423,250 @@ export class OAXDEX_Governance extends Contract{
             };
         }
         this.votingConfigs = votingConfigs_call
-        let votingExecutor_call = async (param1:number|BigNumber): Promise<string> => {
-            let result = await this.call('votingExecutor',[this.wallet.utils.toString(param1)]);
+        let votingExecutor_call = async (param1:number|BigNumber, options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('votingExecutor',[this.wallet.utils.toString(param1)],options);
             return result;
         }
         this.votingExecutor = votingExecutor_call
-        let votingExecutorInv_call = async (param1:string): Promise<BigNumber> => {
-            let result = await this.call('votingExecutorInv',[param1]);
+        let votingExecutorInv_call = async (param1:string, options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('votingExecutorInv',[param1],options);
             return new BigNumber(result);
         }
         this.votingExecutorInv = votingExecutorInv_call
-        let votingExecutorLength_call = async (): Promise<BigNumber> => {
-            let result = await this.call('votingExecutorLength');
+        let votingExecutorLength_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('votingExecutorLength',[],options);
             return new BigNumber(result);
         }
         this.votingExecutorLength = votingExecutorLength_call
-        let votingIdx_call = async (param1:string): Promise<BigNumber> => {
-            let result = await this.call('votingIdx',[param1]);
+        let votingIdx_call = async (param1:string, options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('votingIdx',[param1],options);
             return new BigNumber(result);
         }
         this.votingIdx = votingIdx_call
-        let votingRegister_call = async (): Promise<string> => {
-            let result = await this.call('votingRegister');
+        let votingRegister_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('votingRegister',[],options);
             return result;
         }
         this.votingRegister = votingRegister_call
-        let votingToken_call = async (): Promise<string> => {
-            let result = await this.call('votingToken');
+        let votingToken_call = async (options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('votingToken',[],options);
             return result;
         }
         this.votingToken = votingToken_call
-        let votings_call = async (param1:number|BigNumber): Promise<string> => {
-            let result = await this.call('votings',[this.wallet.utils.toString(param1)]);
+        let votings_call = async (param1:number|BigNumber, options?: TransactionOptions): Promise<string> => {
+            let result = await this.call('votings',[this.wallet.utils.toString(param1)],options);
             return result;
         }
         this.votings = votings_call
         let addVotingConfigParams = (params: IAddVotingConfigParams) => [this.wallet.utils.stringToBytes32(params.name),this.wallet.utils.toString(params.minExeDelay),this.wallet.utils.toString(params.minVoteDuration),this.wallet.utils.toString(params.maxVoteDuration),this.wallet.utils.toString(params.minOaxTokenToCreateVote),this.wallet.utils.toString(params.minQuorum)];
-        let addVotingConfig_send = async (params: IAddVotingConfigParams): Promise<TransactionReceipt> => {
-            let result = await this.send('addVotingConfig',addVotingConfigParams(params));
+        let addVotingConfig_send = async (params: IAddVotingConfigParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('addVotingConfig',addVotingConfigParams(params),options);
             return result;
         }
-        let addVotingConfig_call = async (params: IAddVotingConfigParams): Promise<void> => {
-            let result = await this.call('addVotingConfig',addVotingConfigParams(params));
+        let addVotingConfig_call = async (params: IAddVotingConfigParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('addVotingConfig',addVotingConfigParams(params),options);
             return;
         }
         this.addVotingConfig = Object.assign(addVotingConfig_send, {
             call:addVotingConfig_call
         });
-        let closeVote_send = async (vote:string): Promise<TransactionReceipt> => {
-            let result = await this.send('closeVote',[vote]);
+        let closeVote_send = async (vote:string, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('closeVote',[vote],options);
             return result;
         }
-        let closeVote_call = async (vote:string): Promise<void> => {
-            let result = await this.call('closeVote',[vote]);
+        let closeVote_call = async (vote:string, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('closeVote',[vote],options);
             return;
         }
         this.closeVote = Object.assign(closeVote_send, {
             call:closeVote_call
         });
-        let executed_send = async (): Promise<TransactionReceipt> => {
-            let result = await this.send('executed');
+        let executed_send = async (options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('executed',[],options);
             return result;
         }
-        let executed_call = async (): Promise<void> => {
-            let result = await this.call('executed');
+        let executed_call = async (options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('executed',[],options);
             return;
         }
         this.executed = Object.assign(executed_send, {
             call:executed_call
         });
-        let getNewVoteId_send = async (): Promise<TransactionReceipt> => {
-            let result = await this.send('getNewVoteId');
+        let getNewVoteId_send = async (options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('getNewVoteId',[],options);
             return result;
         }
-        let getNewVoteId_call = async (): Promise<BigNumber> => {
-            let result = await this.call('getNewVoteId');
+        let getNewVoteId_call = async (options?: TransactionOptions): Promise<BigNumber> => {
+            let result = await this.call('getNewVoteId',[],options);
             return new BigNumber(result);
         }
         this.getNewVoteId = Object.assign(getNewVoteId_send, {
             call:getNewVoteId_call
         });
-        let initAdmin_send = async (admin:string): Promise<TransactionReceipt> => {
-            let result = await this.send('initAdmin',[admin]);
+        let initAdmin_send = async (admin:string, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('initAdmin',[admin],options);
             return result;
         }
-        let initAdmin_call = async (admin:string): Promise<void> => {
-            let result = await this.call('initAdmin',[admin]);
+        let initAdmin_call = async (admin:string, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('initAdmin',[admin],options);
             return;
         }
         this.initAdmin = Object.assign(initAdmin_send, {
             call:initAdmin_call
         });
-        let initVotingExecutor_send = async (votingExecutor:string[]): Promise<TransactionReceipt> => {
-            let result = await this.send('initVotingExecutor',[votingExecutor]);
+        let initVotingExecutor_send = async (votingExecutor:string[], options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('initVotingExecutor',[votingExecutor],options);
             return result;
         }
-        let initVotingExecutor_call = async (votingExecutor:string[]): Promise<void> => {
-            let result = await this.call('initVotingExecutor',[votingExecutor]);
+        let initVotingExecutor_call = async (votingExecutor:string[], options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('initVotingExecutor',[votingExecutor],options);
             return;
         }
         this.initVotingExecutor = Object.assign(initVotingExecutor_send, {
             call:initVotingExecutor_call
         });
         let newVoteParams = (params: INewVoteParams) => [params.vote,params.isExecutiveVote];
-        let newVote_send = async (params: INewVoteParams): Promise<TransactionReceipt> => {
-            let result = await this.send('newVote',newVoteParams(params));
+        let newVote_send = async (params: INewVoteParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('newVote',newVoteParams(params),options);
             return result;
         }
-        let newVote_call = async (params: INewVoteParams): Promise<void> => {
-            let result = await this.call('newVote',newVoteParams(params));
+        let newVote_call = async (params: INewVoteParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('newVote',newVoteParams(params),options);
             return;
         }
         this.newVote = Object.assign(newVote_send, {
             call:newVote_call
         });
-        let renounceOwnership_send = async (): Promise<TransactionReceipt> => {
-            let result = await this.send('renounceOwnership');
+        let renounceOwnership_send = async (options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('renounceOwnership',[],options);
             return result;
         }
-        let renounceOwnership_call = async (): Promise<void> => {
-            let result = await this.call('renounceOwnership');
+        let renounceOwnership_call = async (options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('renounceOwnership',[],options);
             return;
         }
         this.renounceOwnership = Object.assign(renounceOwnership_send, {
             call:renounceOwnership_call
         });
-        let setAdmin_send = async (admin:string): Promise<TransactionReceipt> => {
-            let result = await this.send('setAdmin',[admin]);
+        let setAdmin_send = async (admin:string, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('setAdmin',[admin],options);
             return result;
         }
-        let setAdmin_call = async (admin:string): Promise<void> => {
-            let result = await this.call('setAdmin',[admin]);
+        let setAdmin_call = async (admin:string, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('setAdmin',[admin],options);
             return;
         }
         this.setAdmin = Object.assign(setAdmin_send, {
             call:setAdmin_call
         });
-        let setMinStakePeriod_send = async (minStakePeriod:number|BigNumber): Promise<TransactionReceipt> => {
-            let result = await this.send('setMinStakePeriod',[this.wallet.utils.toString(minStakePeriod)]);
+        let setMinStakePeriod_send = async (minStakePeriod:number|BigNumber, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('setMinStakePeriod',[this.wallet.utils.toString(minStakePeriod)],options);
             return result;
         }
-        let setMinStakePeriod_call = async (minStakePeriod:number|BigNumber): Promise<void> => {
-            let result = await this.call('setMinStakePeriod',[this.wallet.utils.toString(minStakePeriod)]);
+        let setMinStakePeriod_call = async (minStakePeriod:number|BigNumber, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('setMinStakePeriod',[this.wallet.utils.toString(minStakePeriod)],options);
             return;
         }
         this.setMinStakePeriod = Object.assign(setMinStakePeriod_send, {
             call:setMinStakePeriod_call
         });
         let setVotingConfigParams = (params: ISetVotingConfigParams) => [this.wallet.utils.stringToBytes32(params.configName),this.wallet.utils.stringToBytes32(params.paramName),this.wallet.utils.toString(params.paramValue)];
-        let setVotingConfig_send = async (params: ISetVotingConfigParams): Promise<TransactionReceipt> => {
-            let result = await this.send('setVotingConfig',setVotingConfigParams(params));
+        let setVotingConfig_send = async (params: ISetVotingConfigParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('setVotingConfig',setVotingConfigParams(params),options);
             return result;
         }
-        let setVotingConfig_call = async (params: ISetVotingConfigParams): Promise<void> => {
-            let result = await this.call('setVotingConfig',setVotingConfigParams(params));
+        let setVotingConfig_call = async (params: ISetVotingConfigParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('setVotingConfig',setVotingConfigParams(params),options);
             return;
         }
         this.setVotingConfig = Object.assign(setVotingConfig_send, {
             call:setVotingConfig_call
         });
         let setVotingExecutorParams = (params: ISetVotingExecutorParams) => [params.votingExecutor,params.bool];
-        let setVotingExecutor_send = async (params: ISetVotingExecutorParams): Promise<TransactionReceipt> => {
-            let result = await this.send('setVotingExecutor',setVotingExecutorParams(params));
+        let setVotingExecutor_send = async (params: ISetVotingExecutorParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('setVotingExecutor',setVotingExecutorParams(params),options);
             return result;
         }
-        let setVotingExecutor_call = async (params: ISetVotingExecutorParams): Promise<void> => {
-            let result = await this.call('setVotingExecutor',setVotingExecutorParams(params));
+        let setVotingExecutor_call = async (params: ISetVotingExecutorParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('setVotingExecutor',setVotingExecutorParams(params),options);
             return;
         }
         this.setVotingExecutor = Object.assign(setVotingExecutor_send, {
             call:setVotingExecutor_call
         });
-        let setVotingRegister_send = async (votingRegister:string): Promise<TransactionReceipt> => {
-            let result = await this.send('setVotingRegister',[votingRegister]);
+        let setVotingRegister_send = async (votingRegister:string, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('setVotingRegister',[votingRegister],options);
             return result;
         }
-        let setVotingRegister_call = async (votingRegister:string): Promise<void> => {
-            let result = await this.call('setVotingRegister',[votingRegister]);
+        let setVotingRegister_call = async (votingRegister:string, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('setVotingRegister',[votingRegister],options);
             return;
         }
         this.setVotingRegister = Object.assign(setVotingRegister_send, {
             call:setVotingRegister_call
         });
-        let stake_send = async (value:number|BigNumber): Promise<TransactionReceipt> => {
-            let result = await this.send('stake',[this.wallet.utils.toString(value)]);
+        let stake_send = async (value:number|BigNumber, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('stake',[this.wallet.utils.toString(value)],options);
             return result;
         }
-        let stake_call = async (value:number|BigNumber): Promise<void> => {
-            let result = await this.call('stake',[this.wallet.utils.toString(value)]);
+        let stake_call = async (value:number|BigNumber, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('stake',[this.wallet.utils.toString(value)],options);
             return;
         }
         this.stake = Object.assign(stake_send, {
             call:stake_call
         });
-        let transferOwnership_send = async (newOwner:string): Promise<TransactionReceipt> => {
-            let result = await this.send('transferOwnership',[newOwner]);
+        let transferOwnership_send = async (newOwner:string, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('transferOwnership',[newOwner],options);
             return result;
         }
-        let transferOwnership_call = async (newOwner:string): Promise<void> => {
-            let result = await this.call('transferOwnership',[newOwner]);
+        let transferOwnership_call = async (newOwner:string, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('transferOwnership',[newOwner],options);
             return;
         }
         this.transferOwnership = Object.assign(transferOwnership_send, {
             call:transferOwnership_call
         });
-        let unlockStake_send = async (): Promise<TransactionReceipt> => {
-            let result = await this.send('unlockStake');
+        let unlockStake_send = async (options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('unlockStake',[],options);
             return result;
         }
-        let unlockStake_call = async (): Promise<void> => {
-            let result = await this.call('unlockStake');
+        let unlockStake_call = async (options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('unlockStake',[],options);
             return;
         }
         this.unlockStake = Object.assign(unlockStake_send, {
             call:unlockStake_call
         });
-        let unstake_send = async (value:number|BigNumber): Promise<TransactionReceipt> => {
-            let result = await this.send('unstake',[this.wallet.utils.toString(value)]);
+        let unstake_send = async (value:number|BigNumber, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('unstake',[this.wallet.utils.toString(value)],options);
             return result;
         }
-        let unstake_call = async (value:number|BigNumber): Promise<void> => {
-            let result = await this.call('unstake',[this.wallet.utils.toString(value)]);
+        let unstake_call = async (value:number|BigNumber, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('unstake',[this.wallet.utils.toString(value)],options);
             return;
         }
         this.unstake = Object.assign(unstake_send, {
             call:unstake_call
         });
-        let veto_send = async (voting:string): Promise<TransactionReceipt> => {
-            let result = await this.send('veto',[voting]);
+        let veto_send = async (voting:string, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('veto',[voting],options);
             return result;
         }
-        let veto_call = async (voting:string): Promise<void> => {
-            let result = await this.call('veto',[voting]);
+        let veto_call = async (voting:string, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('veto',[voting],options);
             return;
         }
         this.veto = Object.assign(veto_send, {
             call:veto_call
         });
         let votedParams = (params: IVotedParams) => [params.poll,params.account,this.wallet.utils.toString(params.option)];
-        let voted_send = async (params: IVotedParams): Promise<TransactionReceipt> => {
-            let result = await this.send('voted',votedParams(params));
+        let voted_send = async (params: IVotedParams, options?: TransactionOptions): Promise<TransactionReceipt> => {
+            let result = await this.send('voted',votedParams(params),options);
             return result;
         }
-        let voted_call = async (params: IVotedParams): Promise<void> => {
-            let result = await this.call('voted',votedParams(params));
+        let voted_call = async (params: IVotedParams, options?: TransactionOptions): Promise<void> => {
+            let result = await this.call('voted',votedParams(params),options);
             return;
         }
         this.voted = Object.assign(voted_send, {

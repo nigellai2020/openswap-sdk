@@ -1,11 +1,11 @@
-import { IWallet, Contract, TransactionReceipt, Event } from "@ijstech/eth-contract";
+import { IWallet, Contract, TransactionReceipt, Event, TransactionOptions } from "@ijstech/eth-contract";
 export interface ISetLiveForPairParams {
     pair: string;
     live: boolean;
 }
 export declare class OSWAP_PausableFactory extends Contract {
     constructor(wallet: IWallet, address?: string);
-    deploy(governance: string): Promise<string>;
+    deploy(governance: string, options?: TransactionOptions): Promise<string>;
     parsePairRestartedEvent(receipt: TransactionReceipt): OSWAP_PausableFactory.PairRestartedEvent[];
     decodePairRestartedEvent(event: Event): OSWAP_PausableFactory.PairRestartedEvent;
     parsePairShutdownedEvent(receipt: TransactionReceipt): OSWAP_PausableFactory.PairShutdownedEvent[];
@@ -15,18 +15,18 @@ export declare class OSWAP_PausableFactory extends Contract {
     parseShutdownedEvent(receipt: TransactionReceipt): OSWAP_PausableFactory.ShutdownedEvent[];
     decodeShutdownedEvent(event: Event): OSWAP_PausableFactory.ShutdownedEvent;
     governance: {
-        (): Promise<string>;
+        (options?: TransactionOptions): Promise<string>;
     };
     isLive: {
-        (): Promise<boolean>;
+        (options?: TransactionOptions): Promise<boolean>;
     };
     setLive: {
-        (isLive: boolean): Promise<TransactionReceipt>;
-        call: (isLive: boolean) => Promise<void>;
+        (isLive: boolean, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (isLive: boolean, options?: TransactionOptions) => Promise<void>;
     };
     setLiveForPair: {
-        (params: ISetLiveForPairParams): Promise<TransactionReceipt>;
-        call: (params: ISetLiveForPairParams) => Promise<void>;
+        (params: ISetLiveForPairParams, options?: TransactionOptions): Promise<TransactionReceipt>;
+        call: (params: ISetLiveForPairParams, options?: TransactionOptions) => Promise<void>;
     };
     private assign;
 }
